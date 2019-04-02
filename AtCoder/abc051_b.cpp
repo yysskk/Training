@@ -1,3 +1,5 @@
+// SeeAlso: https://beta.atcoder.jp/contests/abc051/tasks/abc051_b
+
 #include <bits/stdc++.h>
 
 using namespace std;
