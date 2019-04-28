@@ -19,11 +19,11 @@ typedef int _loop_int;
 using namespace std;
 
 int N;
-ll A[MAX];
+int A[MAX];
 
 int temp;
 int removenum = MAX + 1;
-ll ans = 1;
+int ans = 1;
 
 int gcd(int a, int b) {
     if (a < b) {
@@ -35,22 +35,6 @@ int gcd(int a, int b) {
     return b ? gcd(b, a % b) : a;
 }
 
-int recGCD(int i, int tempAns) {
-    if (tempAns < ans) {
-        return tempAns;
-    }
-
-    if (i == (N-1)) {
-        return tempAns;
-    }
-
-    if ((i+1) == temp) {
-        return recGCD((i+1), gcd(tempAns, A[i]));
-    } else {
-        return recGCD((i+1), gcd(tempAns, A[i+1]));
-    }
-}
-
 int main() {
 
     cin >> N;
@@ -59,41 +43,18 @@ int main() {
         cin >> A[i];
     }
 
+    int R[MAX+1], L[MAX+1];
+
+    L[0] = 0;
+    R[N+1] = 0;
+
     REP(i, N) {
-        ll tempAns = 0;
+        L[i+1] = gcd(L[i], A[i]);
+        R[N-i] = gcd(R[N-i+1], A[N-i]);
+    }
 
-        if (i == 0) {
-            tempAns = A[1];
-        } else {
-            tempAns = A[0];
-        }
-            
-        REP(n, N) {
-
-            if (temp != n) {
-                tempAns = gcd(tempAns, A[n]);
-            } 
-
-            if (tempAns < ans) {
-                temp = removenum;
-                break;
-            }
-        }
-
-        if (tempAns < ans) { 
-            REP(n, N) {
-                if (temp != n) {
-                 tempAns = gcd(tempAns, A[n]);
-            } 
-
-                if (tempAns < ans) {
-                    temp = removenum;
-                    break;
-                }
-            }
-        }
-        
-        ans = max(ans, tempAns);
+    REP(i, N) {
+        ans = max(ans, gcd(R[i+1], L[i]));    
     }
 
     cout << ans << endl;
