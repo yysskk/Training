@@ -10,7 +10,7 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 4
+#define MAX 100000
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -24,7 +24,26 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
+ll N, K;
+priority_queue<pll, vector<pll>, greater<pll>> pq;
+
 int main() {
-    
+    cin >> N >> K;
+    REP(i, N) {
+        int a, b;
+        cin >> a >> b;
+        pq.push(make_pair(a, b));
+    }
+
+    ll sum = 0;
+    REP(i, K) {
+        pll temp = pq.top();
+        pq.pop();
+        sum += temp.first;
+        temp.first += temp.second;
+        pq.push(temp);
+    }
+
+    cout << sum << endl;
     return 0;
 }
