@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/arc074/tasks/arc074_b
 
 #include <bits/stdc++.h>
 
@@ -24,7 +24,15 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
+int N;
+int a[MAX];
+
 int main() {
-    
+    cin >> N;
+
+    REP(i, N) {
+        cin >> a[i];
+    }   
+
     return 0;
 }
