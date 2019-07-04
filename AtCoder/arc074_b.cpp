@@ -25,14 +25,54 @@ typedef int _loop_int;
 #define CHMAX(a,b) a=max((a),(b))
 
 int N;
-int a[MAX];
+ll a[MAX];
+priority_queue<ll, vector<ll>, greater<ll>> a1;
+priority_queue<ll> a2;
 
 int main() {
     cin >> N;
 
     REP(i, N) {
-        cin >> a[i];
+        ll temp;
+        cin >> temp;
+        a1.push(temp);
     }   
+
+    REP(i, N) {
+        ll temp;
+        cin >> a[i];
+    }
+
+    REP(i, N) {
+        ll temp;
+        cin >> temp;
+        a2.push(temp);
+    }
+
+    REP(i, N) {
+        ll temp1 = a1.top();
+        ll temp2 = a2.top();
+        ll first = a[i] - temp1;
+        ll second = temp2 - a[N-1-i];
+        if (first > (second*2)) {
+            a2.pop();
+            a2.push(a[N-1-i]);
+        } else {
+            a1.pop();
+            a1.push(a[i]);
+        }
+    }
+
+    ll ans = 0; 
+    
+    REP(i, N) {
+        ans += a1.top();
+        ans -= a2.top();
+        a1.pop();
+        a2.pop();
+    }
+
+    cout << ans << endl;
 
     return 0;
 }
