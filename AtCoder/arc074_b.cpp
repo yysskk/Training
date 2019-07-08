@@ -10,7 +10,7 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000
+#define MAX 300000
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -29,50 +29,50 @@ ll a[MAX];
 priority_queue<ll, vector<ll>, greater<ll>> a1;
 priority_queue<ll> a2;
 
+ll dp[2][100100];
+
 int main() {
+
+    ll sum = 0;
     cin >> N;
 
-    REP(i, N) {
-        ll temp;
-        cin >> temp;
-        a1.push(temp);
+    REP(i, (3*N)) {
+        cin >> a[i];
     }   
 
     REP(i, N) {
-        ll temp;
-        cin >> a[i];
+        sum += a[i];
+        a1.push(a[i]);
     }
 
-    REP(i, N) {
-        ll temp;
-        cin >> temp;
-        a2.push(temp);
-    }
+	dp[0][0] = sum;
 
-    REP(i, N) {
-        ll temp1 = a1.top();
-        ll temp2 = a2.top();
-        ll first = a[i] - temp1;
-        ll second = temp2 - a[N-1-i];
-        if (first > (second*2)) {
-            a2.pop();
-            a2.push(a[N-1-i]);
-        } else {
-            a1.pop();
-            a1.push(a[i]);
-        }
-    }
+    REP(i,N) {
+		a1.push(a[i+N]);
+		sum += a[i+N];
+		sum -= a1.top();
+		a1.pop();
+		dp[0][i+1] = sum;
+	}
 
-    ll ans = 0; 
-    
-    REP(i, N) {
-        ans += a1.top();
-        ans -= a2.top();
-        a1.pop();
-        a2.pop();
-    }
-
-    cout << ans << endl;
+	sum = 0;
+	REP(i,N) {
+		sum += a[N*2+i];
+		a2.push(a[N*2+i]);
+	}
+	dp[1][N] = sum;
+	for(ll i=(N-1); i >= 0; --i) {
+		a2.push(a[i+N]);
+		sum += a[i+N];
+		sum -= a2.top();
+		a2.pop();
+		dp[1][i] = sum;
+	}
+	ll res = -1e15;
+	REP(i,N+1) {
+		res = max(res, dp[0][i] - dp[1][i]);
+	}
+	cout << res << endl;
 
     return 0;
 }
