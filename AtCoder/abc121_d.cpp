@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc121/tasks/abc121_d
 
 #include <bits/stdc++.h>
 
@@ -24,7 +24,16 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-int main() {
-    
-    return 0;
+ll oddsolve(ll a){
+    return (a+1)/2%2;
+}
+ll solve(ll a){
+    if(a%2==1) return oddsolve(a);
+    else return oddsolve(a+1)^(a+1);
+}
+ 
+int main(void) {
+    ll A,B;
+    cin>>A>>B;
+    cout<<(solve(B)^solve(A-1))<<endl;
 }
