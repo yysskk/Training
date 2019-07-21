@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc120/tasks/abc120_a
 
 #include <bits/stdc++.h>
 
@@ -24,22 +24,14 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-string S;
+int A, B, C;
 
 int main() {
-    
-    cin >> S;
+    cin >> A >> B >> C;
 
-    int counter = 0;
-    int ans = 0;
-    for(int i=0; i<S.size();i++) {
-        if(S[i]=='A' || S[i]=='C' || S[i]=='T' || S[i]=='G') {
-            counter++;
-        } else {
-            counter = 0;
-        }
-        ans = max(ans, counter);
-    }
+    int k = B / A;
+    int ans;
+    ans = min(C, k);
     cout << ans << endl;
     return 0;
 }

@@ -24,22 +24,18 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-string S;
+int N, D;
 
 int main() {
+    cin >> N >> D;
     
-    cin >> S;
-
-    int counter = 0;
-    int ans = 0;
-    for(int i=0; i<S.size();i++) {
-        if(S[i]=='A' || S[i]=='C' || S[i]=='T' || S[i]=='G') {
-            counter++;
-        } else {
-            counter = 0;
-        }
-        ans = max(ans, counter);
+    int ans = 1;
+    int i = D+1+D;
+    while(i < N) {
+        ans += 1;
+        i += (D * 2) + 1;
     }
+
     cout << ans << endl;
     return 0;
 }

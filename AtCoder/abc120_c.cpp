@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc120/tasks/abc120_c
 
 #include <bits/stdc++.h>
 
@@ -27,19 +27,7 @@ typedef int _loop_int;
 string S;
 
 int main() {
-    
     cin >> S;
-
-    int counter = 0;
-    int ans = 0;
-    for(int i=0; i<S.size();i++) {
-        if(S[i]=='A' || S[i]=='C' || S[i]=='T' || S[i]=='G') {
-            counter++;
-        } else {
-            counter = 0;
-        }
-        ans = max(ans, counter);
-    }
-    cout << ans << endl;
+        
     return 0;
 }

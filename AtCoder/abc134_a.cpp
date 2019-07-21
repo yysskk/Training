@@ -24,22 +24,12 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-string S;
-
+ll r;
 int main() {
-    
-    cin >> S;
+    cin >> r;
 
-    int counter = 0;
-    int ans = 0;
-    for(int i=0; i<S.size();i++) {
-        if(S[i]=='A' || S[i]=='C' || S[i]=='T' || S[i]=='G') {
-            counter++;
-        } else {
-            counter = 0;
-        }
-        ans = max(ans, counter);
-    }
+    ll ans = 3 * r * r;
     cout << ans << endl;
+
     return 0;
 }

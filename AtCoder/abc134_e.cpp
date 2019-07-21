@@ -24,22 +24,28 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-string S;
+ll N;
+ll a[MAX];
 
 int main() {
-    
-    cin >> S;
+    cin >> N;
 
-    int counter = 0;
-    int ans = 0;
-    for(int i=0; i<S.size();i++) {
-        if(S[i]=='A' || S[i]=='C' || S[i]=='T' || S[i]=='G') {
-            counter++;
-        } else {
-            counter = 0;
+    REP(i, N) {
+        cin >> a[i];
+    }    
+
+    multiset<int> ms;
+
+    for(int i=0; i<N; ++i){
+        auto it = ms.lower_bound(a[i]);
+        if(it != ms.begin()){
+            it--;
+            ms.erase(it);
         }
-        ans = max(ans, counter);
+        ms.insert(a[i]);
     }
-    cout << ans << endl;
+
+    cout << ms.size() << endl;
+
     return 0;
 }
