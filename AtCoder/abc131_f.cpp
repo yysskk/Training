@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc131/tasks/abc131_c
 
 #include <bits/stdc++.h>
 
@@ -24,12 +24,17 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-// 最大公約数
-inline constexpr ll gcd(ll a,ll b){if(!a||!b)return 0;while(b){ll c=b;b=a%b;a=c;}return a;}
-// 最小公倍数
-inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
-
+ll A, B, C, D;
 int main() {
     
+    cin >> A >> B >> C >> D;
+
+    ll ans = 0;
+    for(ll i = A; i <= B; i++) {
+        if((i%C)!=0&&(i%D)!=0) {
+            ans++;
+        }
+    }
+    cout << ans << endl;
     return 0;
 }

@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc131/tasks/abc131_a
 
 #include <bits/stdc++.h>
 
@@ -13,7 +13,7 @@ typedef pair<ll,ll> pll;
 #define MAX 100000
 
 typedef int _loop_int;
-#define REP(i,n) for(int i = 0; i < n; i++)
+#define REP(i,n) for(int i = 1; i < n; i++)
 #define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
@@ -24,12 +24,27 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-// 最大公約数
-inline constexpr ll gcd(ll a,ll b){if(!a||!b)return 0;while(b){ll c=b;b=a%b;a=c;}return a;}
-// 最小公倍数
-inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
+string S;
 
 int main() {
-    
+    cin >> S;
+
+    bool flag = true;
+    REP(i, S.size()) {
+        if (S[i] == S[i-1]) {
+            flag = false;
+            break;
+        }
+    }
+
+    string ans;
+    if (flag) {
+        ans = "Good";
+    } else {
+        ans = "Bad";
+    }
+    cout << ans << endl;
     return 0;
 }
+
+
