@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc131/tasks/abc131_e
 
 #include <bits/stdc++.h>
 
@@ -24,28 +24,41 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-ll N;
-ll a[MAX];
+// 最大公約数
+inline constexpr ll gcd(ll a,ll b){if(!a||!b)return 0;while(b){ll c=b;b=a%b;a=c;}return a;}
+// 最小公倍数
+inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
+
+#define print2D(h, w, arr) REP(i, h) { REP(j, w) cout << arr[i][j] << " "; cout << endl; }
+template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
+template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
+
+int N, K;
 
 int main() {
-    cin >> N;
+    cin >> N >> K;
 
-    REP(i, N) {
-        cin >> a[i];
-    }    
-
-    multiset<int> ms;
-
-    for(int i=0; i<N; ++i){
-        auto it = ms.lower_bound(a[i]);
-        if(it != ms.begin()){
-            it--;
-            ms.erase(it);
-        }
-        ms.insert(a[i]);
+  int M = (N-1)*(N-2)/2 - K + (N-1);
+  
+  if (M < (N-1)) {
+    print(-1);
+	return 0;
+  }
+ 
+  print(M);
+  REP(i, N-1) {
+    print(1, (i+2));
+  }
+  int s = 2;
+  int t = 3;
+  REP(i, M - (N-1)) {
+    print(s, t);
+    t++;
+    if (N < t) {
+      s++;
+      t = s+1;
     }
-
-    cout << ms.size() << endl;
+  }
 
     return 0;
 }
