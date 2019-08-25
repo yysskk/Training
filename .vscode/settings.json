@@ -1,5 +1,19 @@
 {
     "files.associations": {
-        "iostream": "cpp"
-    }
+        "iostream": "cpp",
+        "algorithm": "cpp",
+        "random": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
+    },
+    "code-runner.runInTerminal": true,
+    "clang.executable": "clang++",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++14 $fileName && ./a.out",
+    },
+    "clang.cxxflags": [
+        "-std=c++14"
+    ],
+    "code-runner.clearPreviousOutput": true
 }
