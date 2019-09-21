@@ -34,7 +34,42 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+ll N,K,Q;
+
+ll member[MAX];
+
 int main() {
-    
+    cin >> N >> K >> Q;
+
+    REP(i,N) {
+        member[i] = K;
+    }
+
+    multiset<ll> A;
+
+    REP(i, Q) {
+        ll a;
+        cin >> a;
+        A.insert(a);
+    }
+    auto temp = A.begin();
+    REP(i, N) {
+        ll acounter = 0; 
+        
+        for(auto it = temp;it!=A.end();it++) {
+            if ((i+1)==*it) {
+                acounter++;
+            } else {
+                temp = it;
+                break;
+            }
+        }
+        
+        if ((K-Q+acounter)>0) {
+            print("Yes");
+        } else{
+            print("No");
+        }
+    }
     return 0;
 }

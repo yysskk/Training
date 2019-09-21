@@ -34,7 +34,37 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+int N;
+
+string S;
+
 int main() {
+    cin >> N >> S;    
+
+    int res = 0;
+    int right = 1;
+
+    REP(left, N) {
+       
+        string target = S.substr(left, right);
+        int endnum = 1;
+        while(((S.compare(0,endnum,target)>0) || (S.compare((right+1), (N-right), target)>0)) && (right-left) <= (N/2)) {
+            right++;
+            target = S.substr(left, right);
+            if (left > 1) {
+                endnum = left-1;
+            }
+        }
+        DEBUG(target);
+        DEBUG(left);
+        DEBUG(right);
+        res = max(res, (right-1-left));
     
+        if(left==right) {
+            right++;
+        }
+    }
+
+    print(res);
     return 0;
 }

@@ -34,7 +34,16 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+string S;
+
 int main() {
-    
+    cin >> S;
+    if (S=="Sunny") {
+        print("Cloudy");
+    } else if (S=="Cloudy") {
+        print("Rainy");
+    } else {
+        print("Sunny");
+    }
     return 0;
 }
