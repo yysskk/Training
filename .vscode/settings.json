@@ -32,7 +32,8 @@
         "scoped_allocator": "cpp",
         "ios": "cpp",
         "__functional_03": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "ostream": "cpp"
     },
     "code-runner.runInTerminal": true,
     "clang.executable": "clang++",
