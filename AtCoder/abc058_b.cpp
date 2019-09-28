@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc058/tasks/abc058_b
 
 #include <bits/stdc++.h>
 
@@ -10,7 +10,7 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000
+#define MAX 50
 #define NIL -1
 #define MOD 1000000007
 
@@ -35,7 +35,21 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+string O,E;
+
 int main() {
-    
+    cin >> O;
+    cin >> E;
+
+    int counter = O.length() + E.length();
+    string ans = "";
+    REP(i, counter) {
+        if(i%2==0) {
+            ans += O[i/2];
+        } else {
+            ans += E[i/2];
+        }
+    }
+    print(ans);
     return 0;
 }
