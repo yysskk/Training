@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc142/tasks/abc142_f
+// SeeAlso: https://atcoder.jp/contests/abc060/tasks/abc060_a
 
 #include <bits/stdc++.h>
 
@@ -35,7 +35,12 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+string a, b, c;
+
 int main() {
-    
+    cin >> a >> b >> c;
+    bool flag1 = a[a.size()-1] == b[0];
+    bool flag2 = b[b.size()-1] == c[0];
+    print((flag1&&flag2)?"YES": "NO");
     return 0;
 }

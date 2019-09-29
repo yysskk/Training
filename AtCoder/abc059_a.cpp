@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc142/tasks/abc142_f
+// SeeAlso: https://atcoder.jp/contests/abc059/tasks/abc059_a
 
 #include <bits/stdc++.h>
 
@@ -35,7 +35,11 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+string s1, s2, s3;
+
 int main() {
-    
+    cin >> s1 >> s2 >> s3;
+    auto l = locale::classic();
+    cout << toupper(s1[0],l) << toupper(s2[0],l) << toupper(s3[0],l) << endl;
     return 0;
 }
