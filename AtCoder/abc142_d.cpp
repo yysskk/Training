@@ -45,31 +45,21 @@ bool coprime(ll a, ll b) {
 int main() {
     cin >> A >> B;
 
-    ll maxNum = gcd(A, B);
-    ll ans = 0;
-    ll v[maxNum];
+    ll g = gcd(A, B);
+    ll ans = 1;
 
-    ll counter = 0;
-    for(ll i =0;i<maxNum;i++) { 
-        if((A%i==0)&&(B%i==0)) {
-            v[counter] = i;
-            counter++;
-        }
-    }
-
-    REP(j, counter) { 
-        bool flag = true;
-        REP(i, j) {
-            if(!coprime(j,i)) {
-                flag = false;
-                break;
-            }
-        }
-        if(flag) {
+    for(ll i =2;i*i<g;i++) { 
+        if(g%i==0){
             ans++;
+            while(g%i==0){
+                g/=i;
+            }
+            
         }
     }
 
+    if(g!=1){ans++;}
+    
     print(ans);
     return 0;
 }
