@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc007/tasks/abc007_2
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,14 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+
+    string A;
+    cin >> A;
+
+    if(A=="a") {
+        print(-1);
+    } else {
+        print('a');
+    }
     return 0;
 }

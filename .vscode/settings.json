@@ -92,7 +92,8 @@
         "variant": "cpp",
         "bit": "cpp",
         "cuchar": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "filesystem": "cpp"
     },
     "code-runner.runInTerminal": true,
     "clang.executable": "clang++",
