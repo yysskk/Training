@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc144/tasks/abc145_c
 
 #include <bits/stdc++.h>
 
@@ -32,7 +32,44 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+double sum;
+int n;
+int x[8], y[8];
+
+double dist(int i, int j) {
+    double dx = x[i] - x[j];
+    double dy = y[i] - y[j];
+    return pow(dx * dx + dy * dy, 0.5);
+}
+
+void length() {
+    rep(i, n) {
+        for(int j=i+1; j<n;j++) {
+            sum += dist(i, j);
+        }
+    }
+    return;
+}
+
+int rec(int s) {
+    if(s>1) {
+        return s * rec(s-1);
+    }
+    return s;
+}
+
 int main() {
-    
+    int n;
+    cin >> n;
+
+    rep(i, n) {
+        cin >> x[i] >> y[i];
+    }
+
+    double ans = 0.0;
+    for(int i = 0; i < n; i++) {
+        for(int j = i + 1; j < n; j++) ans += dist(i, j) * 2 / n;
+    }
+    print(ans);
     return 0;
 }

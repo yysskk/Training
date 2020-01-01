@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: https://atcoder.jp/contests/abc142/tasks/abc142_d
 
 #include <bits/stdc++.h>
 
@@ -12,6 +12,7 @@ typedef pair<ll,ll> pll;
 
 #define MAX 100000
 #define NIL -1
+#define MOD 1000000007
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -34,27 +35,31 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+ll A, B;
+
+/// 互いに素
+bool coprime(ll a, ll b) {
+  return (gcd(a, b) == 1);
+}
 
 int main() {
-    cin >> S;
+    cin >> A >> B;
 
-    int n = S.size();
-    ll ans = 0;
+    ll g = gcd(A, B);
+    ll ans = 1;
 
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+    for(ll i =2;i*i<g;i++) { 
+        if(g%i==0){
+            ans++;
+            while(g%i==0){
+                g/=i;
+            }
+            
         }
-        ans += sum;
     }
 
+    if(g!=1){ans++;}
+    
     print(ans);
     return 0;
 }

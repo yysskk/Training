@@ -19,42 +19,47 @@ typedef int _loop_int;
 
 using namespace std;
 
-int n;
-vector<int> a;
+struct Node {
+    int parent, left, right;
+};
 
-int main() {
+Node tree[MAX];
 
+void rec(int u, int p) {
     
-    cin >> n;
-
-    REP(i, n) {
-        int tmp;
-        cin >> tmp;
-        a.push(tmp);
-    }
-
-    if(dfs(0,0)) {
-        cout << "YES" << endl;
-    } else {
-        cout << "NO" << endl;
-    }
-
-    return 0;
 }
 
-bool dfs(int i, int sum) {
+int main() {
+    int N;
+    cin >> N;   
 
-    if (i == n) {
-        return sum == k;
+    REP(i, N) {
+        tree[i].parent = tree[i].left = tree[i].right = NIL;
     }
 
-    if (dfs(i + n, sum)) {
-        return true;
+    REP(i, N) {
+        int a, b;
+        cin >> a >> b;
+        REP(j, b) {
+            int c, l;
+            cin >> c; 
+            tree[a].parent = NIL;
+            if (j==0) {
+                tree[a].left = c;
+            } else {
+                tree[l].right = c;
+            }
+            l = c;
+            tree[c].parent = a;
+        } 
+    }
+    
+    int r = 0;
+    REP(i, N) {
+        if(tree[i].parent==NIL) {
+            r=i;
+        }
     }
 
-    if (dfs(i + 1, sum + a.at[i])) {
-        return true;
-    }
-
-    return false;
+    rec(r, 0);
 }

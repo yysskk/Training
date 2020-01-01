@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: https://atcoder.jp/contests/abc062/tasks/abc062_a
 
 #include <bits/stdc++.h>
 
@@ -12,6 +12,7 @@ typedef pair<ll,ll> pll;
 
 #define MAX 100000
 #define NIL -1
+#define MOD 1000000007
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -34,27 +35,22 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+int x, y;
 
-int main() {
-    cin >> S;
-
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
-        }
-        ans += sum;
+int group(int num) {
+    if (num==1||num==3||num==5||num==7||num==8||num==10||num==12) {
+        return 0;
+    } else if (num==4||num==6||num==9||num==11) {
+        return 1;
+    }else {
+        return 2;
     }
-
-    print(ans);
+}
+int main() {
+    cin >> x >> y;
+    int x_g, y_g;
+    x_g = group(x);
+    y_g = group(y);
+    print((x_g==y_g)?"Yes":"No");
     return 0;
 }

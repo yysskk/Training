@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -34,27 +34,42 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+ll N, M;
 
 int main() {
-    cin >> S;
+    cin >> N >> M;
 
-    int n = S.size();
+    multiset<ll, greater<ll>> price;
+    REP(i,N) {
+        ll a;
+        cin >> a;
+        price.insert(a);
+    }
+    ll i=0;
+    while(i<=M) {
+        auto x = price.begin();
+        ll first = *x;
+        price.erase(x);
+        ll second = *price.begin();
+        for(ll j = 1; (i+j) <= M;j++) {
+            ll temp = first / pow(2, j);
+            if(second >= temp) {
+                price.insert(temp);
+                i += j;
+                break;
+            }
+        }
+
+        if(i==M) {
+            break;
+        }
+    }
     ll ans = 0;
 
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
-        }
-        ans += sum;
+    for(auto it = price.begin();it!=price.end();it++) {
+        ans += *it;
     }
-
     print(ans);
     return 0;
 }
+

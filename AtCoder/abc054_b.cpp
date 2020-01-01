@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: https://atcoder.jp/contests/abc054/tasks/abc054_b
 
 #include <bits/stdc++.h>
 
@@ -10,7 +10,7 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000
+#define MAX 50
 #define NIL -1
 
 typedef int _loop_int;
@@ -34,27 +34,52 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+int N, M;
+string A[MAX], B[MAX];
 
-int main() {
-    cin >> S;
+bool ans = false;
 
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+int rec(int n, int m, int r, int s_length) {
+    if(m > (M-1)) {
+        return 0;
+    }
+    auto pos = A[n].find(B[m], r, s_length);
+    while(pos != string::npos) {
+        if((M-1)==m) {
+            ans = true;
+            break;
+        } else if(m==0) {
+            pos = A[n].find(B[m], pos+s_length, s_length);
+            
+        } else {
+            rec(n+1, m+1, pos, M);
+            break;
         }
-        ans += sum;
     }
 
-    print(ans);
+    if((N-n)>M) {
+        rec(n+1, 0, 0, N);
+    }
+    return 0;
+}
+
+int main() {
+    
+    REP(i, N) {
+        cin >> A[i];
+    }
+
+    REP(i, M) {
+        cin >> B[i];
+    }
+
+    rec(0, 0, 0, N);
+
+    if(ans) {
+        print("Yes");
+    } else {
+        print("No");
+    }
+
     return 0;
 }

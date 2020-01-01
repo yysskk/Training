@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: https://atcoder.jp/contests/abc056/tasks/abc056_b
 
 #include <bits/stdc++.h>
 
@@ -10,8 +10,9 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000
+#define MAX 50
 #define NIL -1
+#define MOD 1000000007
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -34,27 +35,24 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+ll W, a, b;
 
 int main() {
-    cin >> S;
-
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+    cin >> W >> a >> b;
+    ll ans;
+    if(a<b) {
+        if((a+W)<b) {
+            ans = abs(b-a-W);
+        } else {
+            ans = 0;
         }
-        ans += sum;
+    } else {
+        if((b+W)<a) {
+            ans = abs(a-b-W); 
+        } else {
+            ans = 0;
+        }
     }
-
     print(ans);
     return 0;
 }

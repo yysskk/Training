@@ -33,6 +33,49 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    ll n;
+    multiset<ll> a, b, c;
+
+    rep(i, n) {
+        ll temp;
+        cin >> temp;
+        a.insert(temp);
+    }
+    rep(i, n) {
+        ll temp;
+        cin >> temp;
+        b.insert(temp);
+    }
+    rep(i, n) {
+        ll temp;
+        cin >> temp;
+        c.insert(temp);
+    }
+
+    ll ans = 0;
+    for(auto ita=a.begin();ita!=a.end();ita++) {
+        ll tempb = 0;
+        ll tempc = 0;
+        ll lastb = 0;
+        for(auto itb=b.begin();itb!=b.end();itb++) {
+            if(*itb>a) {
+                tempb++;
+                lastb = *itb;
+            } else {
+                b.delete(*itb);
+            }
+        }
+        if (lastb>0) {
+        for(auto itb=c.begin();itb!=c.end();itb++) {
+            if(*itb>lastb) {
+                tempc++;
+            } else {
+                b.delete(*itb);
+            }
+        }
+        }
+        ans += tempb*tempc;
+    }
+    print(ans);
     return 0;
 }

@@ -33,6 +33,41 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    char X, Y;
+    cin >> X >> Y;
+
+    int x,y;
+    if(X=='A') {
+        x = 10;
+    } else if (X=='B') {
+        x = 11;
+    } else if (X=='C') {
+        x = 12;
+    } else if (X=='D') {
+        x = 13;
+    } else if (X=='E') {
+        x = 14;
+    } else if (X=='F') {
+        x = 15;
+    }
+    if(Y=='A') {
+        y = 10;
+    } else if (Y=='B') {
+        y = 11;
+    } else if (Y=='C') {
+        y = 12;
+    } else if (Y=='D') {
+        y = 13;
+    } else if (Y=='E') {
+        y = 14;
+    } else if (Y=='F') {
+        y = 15;
+    }
     
+    if(x==y) {
+        print("=");
+    }else {
+        print(x>y?">":"<");
+    }
     return 0;
 }

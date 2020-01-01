@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc144/tasks/abc144_e
 
 #include <bits/stdc++.h>
 
@@ -32,7 +32,40 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+ll N, K;
+vector<ll> A,F;
+ 
+bool judge(ll lim){
+  ll res=0;
+  for(int i=0;i<N;i++){
+    ll z=lim/F[i];
+    if(z>=A[i]) continue;
+    res+=(A[i]-z);
+    if(res>K) return false; 
+  }
+  return true;
+}
+
 int main() {
-    
+
+    cin >> N >> K;
+
+    A.resize(N);
+    F.resize(N);
+    rep(i,N) cin>>A[i];
+    rep(i,N) cin>>F[i];
+ 
+    sort(A.begin(),A.end());
+    sort(F.begin(),F.end());
+    reverse(F.begin(),F.end());
+ 
+    ll ok=1e15,ng=-1;
+    while(ok-ng>1){
+        ll mid=(ok+ng)/2;
+        if(judge(mid)) ok=mid;
+        else ng=mid;
+    }
+
+    print(ok);
     return 0;
 }

@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: https://atcoder.jp/contests/abc118/tasks/abc118_c
 
 #include <bits/stdc++.h>
 
@@ -11,7 +11,6 @@ typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
 #define MAX 100000
-#define NIL -1
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -34,27 +33,35 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+ll N;
+set<ll> A;
+
+
+ll dfs(set<ll> a) {
+    auto minimum = *a.begin();
+    if (a.size()==1) {
+        return minimum;
+    }  
+    set<ll> b;
+    b.insert(minimum);
+    for(auto it = a.begin(); it != a.end();it++) {
+        ll ap = *it%minimum;
+        if (ap>0) {
+            b.insert(ap);
+        }
+    }
+    return dfs(b);
+}
 
 int main() {
-    cin >> S;
-
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
-        }
-        ans += sum;
+    cin >> N;
+    REP(i, N) {
+        int a;
+        cin >> a;
+        A.insert(a);
     }
 
+    ll ans =  dfs(A);
     print(ans);
     return 0;
 }

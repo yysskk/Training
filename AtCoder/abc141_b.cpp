@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -38,23 +38,29 @@ string S;
 
 int main() {
     cin >> S;
+    
+    bool flag = true;
 
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+    int scounter = S.size();
+    REP(i, scounter) {
+        
+        if(i%2==1) {
+            if(!(S[i]=='L'||S[i]=='U'||S[i]=='D')) {
+                flag = false;
+                break;
+            }
+        } else {
+            if(!(S[i]=='R'||S[i]=='U'||S[i]=='D')) {
+                flag = false;
+                break;
+            }
         }
-        ans += sum;
     }
 
-    print(ans);
+    if (flag) {
+        print("Yes");
+    } else {
+        print("No");
+    }
     return 0;
 }

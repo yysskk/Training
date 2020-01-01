@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: https://atcoder.jp/contests/abc053/tasks/abc053_b
 
 #include <bits/stdc++.h>
 
@@ -34,27 +34,25 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+string s;
 
 int main() {
-    cin >> S;
+    
+    cin >> s;
 
-    int n = S.size();
-    ll ans = 0;
+    int l = s.length();
+    int start = l;
+    int end = 0;
 
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+    REP(i, l) {
+        if(s[i]=='A') {
+            start = min(start, i);    
         }
-        ans += sum;
+        if(s[l-i-1]=='Z') {
+            end = max(end, l-i-1);
+        }
     }
 
-    print(ans);
+    print(end-start+1);
     return 0;
 }

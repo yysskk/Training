@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -11,7 +11,6 @@ typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
 #define MAX 100000
-#define NIL -1
 
 typedef int _loop_int;
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -34,27 +33,57 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
-
+int N, M;
+ 
 int main() {
-    cin >> S;
 
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+    cin >> N >> M;
+ 
+    vector<int> A(M);
+    for (int i = 0; i < M; i++) cin >> A[i];
+    sort(A.begin(), A.end());
+ 
+    map<int, int> m;
+    m[1] = 2;
+    m[2] = 5;
+    m[3] = 5;
+    m[4] = 4;
+    m[5] = 5;
+    m[6] = 6;
+    m[7] = 3;
+    m[8] = 7;
+    m[9] = 6;
+ 
+    vector<int> use;
+    for (int i = 0; i < A.size(); i++) use.push_back(m[A[i]]);
+    sort(use.begin(), use.end());
+    use.erase(unique(use.begin(), use.end()), use.end());
+  
+    vector<int> dp(N + 100, -1);
+    dp[0] = 0;
+    for (int i = 0; i <= N; i++) {
+        if (dp[i] >= 0) {
+            for (int j = 0; j < use.size(); j++) {
+                dp[i + use[j]] = max(dp[i + use[j]], dp[i] + 1);
+            }
         }
-        ans += sum;
+    }
+ 
+    string ans = "";
+    int remain = N;
+    int digit = dp[N];
+    while (remain > 0) {
+        for (int i = M - 1; i >= 0; i--) {
+            if (remain - m[A[i]] >= 0 && digit - dp[remain - m[A[i]]] == 1) {
+                ans += (char) ('0' + A[i]);
+                remain -= m[A[i]];
+                digit--;
+                break;
+            }
+        }
     }
 
     print(ans);
+
     return 0;
 }

@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -34,27 +34,37 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+int N;
+
 string S;
 
 int main() {
-    cin >> S;
+    cin >> N >> S;    
 
-    int n = S.size();
-    ll ans = 0;
+    int res = 0;
+    int right = 1;
 
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
+    REP(left, N) {
+       
+        string target = S.substr(left, right);
+        int endnum = 1;
+        while(((S.compare(0,endnum,target)>0) || (S.compare((right+1), (N-right), target)>0)) && (right-left) <= (N/2)) {
+            right++;
+            target = S.substr(left, right);
+            if (left > 1) {
+                endnum = left-1;
+            }
         }
-        ans += sum;
+        DEBUG(target);
+        DEBUG(left);
+        DEBUG(right);
+        res = max(res, (right-1-left));
+    
+        if(left==right) {
+            right++;
+        }
     }
 
-    print(ans);
+    print(res);
     return 0;
 }

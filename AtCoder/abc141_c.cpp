@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/arc061/tasks/arc061_a
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -34,27 +34,42 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-string S;
+ll N,K,Q;
+
+ll member[MAX];
 
 int main() {
-    cin >> S;
+    cin >> N >> K >> Q;
 
-    int n = S.size();
-    ll ans = 0;
-
-    for (int bit = 0; bit < (1<<(n-1)); ++bit) {
-        ll sum = S[0] - '0';
-        for (int i = 0; i<(n-1); ++i) {
-            if (bit & (1<<i)) { 
-                ans += sum;
-                sum = 0;
-            }         
-            sum *= 10;
-            sum += S[i+1] - '0';
-        }
-        ans += sum;
+    REP(i,N) {
+        member[i] = K;
     }
 
-    print(ans);
+    multiset<ll> A;
+
+    REP(i, Q) {
+        ll a;
+        cin >> a;
+        A.insert(a);
+    }
+    auto temp = A.begin();
+    REP(i, N) {
+        ll acounter = 0; 
+        
+        for(auto it = temp;it!=A.end();it++) {
+            if ((i+1)==*it) {
+                acounter++;
+            } else {
+                temp = it;
+                break;
+            }
+        }
+        
+        if ((K-Q+acounter)>0) {
+            print("Yes");
+        } else{
+            print("No");
+        }
+    }
     return 0;
 }
