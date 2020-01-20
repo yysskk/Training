@@ -49,15 +49,16 @@ int main() {
     REP(i, (N-1)) {
         cin >> C[i];
     }    
-    int ans = 0;
+
+    ll ans = 0;
+    int temp = -1;
     REP(i, N) {
-        ans += B[A[i]-1];
-        if(A[i]<(N-1)) {
-            if(A[i]==(A[i+1]+1)) {
-                ans += C[A[i]-1];
-            }
+        int dish = A[i]-1;
+        ans += B[dish];
+        if(dish==temp) {
+            ans += C[dish-1];
         }
-        DEBUG(ans);
+        temp = dish+1;
     }
     print(ans);
 
