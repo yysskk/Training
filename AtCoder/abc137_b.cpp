@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc144/tasks/abc145_f
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,11 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    int k, x;
+    cin >> k >> x;
+
+    ll start = max(-1000000, x-k);
+    ll end = min(1000000, x+k);
+    FOR(i, start, end) P
     return 0;
 }

@@ -1,13 +1,14 @@
 #include <bits/stdc++.h>
 
 typedef long long ll;
+using namespace std;
 
 
-#define MAX 1000000
+#define MAX 1000
 
 typedef int _loop_int;
-#define REP(i,n) for(int i = 0; i < n; i++)
-#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
+#define rep(i,n) for(int i = 0; i < n; i++)
+#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<=(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
 #define DEBUG(x) cout<<#x<<": "<<x<<endl
@@ -17,49 +18,64 @@ typedef int _loop_int;
 #define CHMIN(a,b) a=min((a),(b))
 #define CHMAX(a,b) a=max((a),(b))
 
-using namespace std;
+// 最大公約数
+inline constexpr ll gcd(ll a,ll b){if(!a||!b)return 0;while(b){ll c=b;b=a%b;a=c;}return a;}
+// 最小公倍数
+inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 
-struct Node {
-    int parent, left, right;
-};
+#define print2D(h, w, arr) rep(i, h) { rep(j, w) cout << arr[i][j] << " "; cout << endl; }
+template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
+template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-Node tree[MAX];
+int heap[MAX];
+int H;
 
-void rec(int u, int p) {
-    
+int parent(int i) { return heap[i/2]; }
+int left(int i) { 
+    if (H>=2*i) {
+        return heap[2*i];
+    } else {
+        return -1;
+    }
+}
+
+int right(int i) {
+    if(H>=(2*i+1)) {
+        return heap[2*i+1];
+    } else {
+        return -1;
+    }
+}
+void maxHeapify(int i) {
+    int l = 2*i;
+    int r = 2*i+1;
+    int largest = i;
+    if(heap[largest] < left(i)) {
+        largest = l; 
+    }
+    if(heap[largest] < right(i)) {
+        largest = r;
+    }
+    if(largest!=i) {
+        swap(heap[i], heap[largest]);
+        maxHeapify(largest);
+    }
 }
 
 int main() {
-    int N;
-    cin >> N;   
-
-    REP(i, N) {
-        tree[i].parent = tree[i].left = tree[i].right = NIL;
+    cin >> H;
+    FOR(i, 1, H) {
+        cin >> heap[i];
     }
 
-    REP(i, N) {
-        int a, b;
-        cin >> a >> b;
-        REP(j, b) {
-            int c, l;
-            cin >> c; 
-            tree[a].parent = NIL;
-            if (j==0) {
-                tree[a].left = c;
-            } else {
-                tree[l].right = c;
-            }
-            l = c;
-            tree[c].parent = a;
-        } 
+    for(int i=H/2;i>=1;i--) {
+        maxHeapify(i);
     }
     
-    int r = 0;
-    REP(i, N) {
-        if(tree[i].parent==NIL) {
-            r=i;
-        }
+    FOR(i, 1, H) {
+        cout << heap[i] << " ";
     }
+    cout << endl;
 
-    rec(r, 0);
+    return 0;
 }

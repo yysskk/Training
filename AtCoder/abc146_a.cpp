@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc144/tasks/abc145_f
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,23 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    string s;
+    cin >> s;
+
+    if(s=="SAT") {
+        print(1);
+    } else if(s=="SUN") {
+        print(7);
+    } else if(s=="MON") {
+        print(6);
+    } else if(s=="TUE") {
+        print(5);
+    } else if(s=="WED") {
+        print(4);
+    } else if(s=="THU") {
+        print(3);
+    } else if(s=="FRI") {
+        print(2);
+    }
     return 0;
 }

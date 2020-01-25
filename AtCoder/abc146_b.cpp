@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc144/tasks/abc145_f
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,22 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    int n;
+    string S;
+    char c[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    cin >> n;
+    cin >> S;
+    for (auto it = S.begin(); it != S.end(); it++) {
+        char value = *it;
+        int ind;
+        rep(i, 26) {
+            if(c[i]==value) {
+                ind = i;
+            }
+        }
+        ind = (ind+n) % 26;
+        cout << c[ind];
+    }
+    cout << endl;
     return 0;
 }

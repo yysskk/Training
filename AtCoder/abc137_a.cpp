@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc144/tasks/abc145_f
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,10 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    int a,b;
+    cin >> a >> b;    
+    int ans = max(a*b, max(a+b, a-b));
+    print(ans);
     return 0;
 }
+
