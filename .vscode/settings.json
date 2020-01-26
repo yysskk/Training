@@ -104,5 +104,6 @@
     "clang.cxxflags": [
         "-std=c++14"
     ],
-    "code-runner.clearPreviousOutput": true
+    "code-runner.clearPreviousOutput": true,
+    "git.ignoreLimitWarning": true
 }
