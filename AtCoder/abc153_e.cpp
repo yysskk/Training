@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc153/tasks/abc153_e
 
 #include <bits/stdc++.h>
 
@@ -10,13 +10,13 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000
+#define MAX 100000000
 #define NIL -1
 #define MOD 1000000007
 
 typedef int _loop_int;
 #define rep(i,n) for(int i = 0; i < n; i++)
-#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
+#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<=(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
 #define debug(x) cout<<#x<<": "<<x<<endl
@@ -35,54 +35,25 @@ template<class T, class... A> void print(const T& first, const A&... rest) { cou
 ll H, N;
 ll A[MAX], B[MAX];
 
-ll mina = 0;
-void rec(ll hp, ll sum_b, ll i) {
-
-    if(hp<=0) {
-        mina = min(mina, sum_b); 
-        return;
-    }
-    hp -= A[i];
-    sum_b += B[i];
-    rep(i, N) {
-        rec(hp, sum_b, i);
-    }
-}
-
 int main() {
 
     cin >> H >> N;
 
-    ll ma_a = 0;
-    ll ma_b = 0;
-    double ma_c = 0;
-
     ll mm_a = 0;
     rep(i, N) {
         cin >> A[i] >> B[i];
-        mm_a = max(mm_a, A[i]);
-        double t_a = A[i];
-        double t_b = B[i];
-        double t_c = t_a/t_b;
-        if(ma_c < t_c) {
-            ma_a = A[i];
-            ma_b = B[i];
-            ma_c = t_c;
-        }
     } 
 
-    ll ans = 0;
-    while(H>=mm_a) {
-        H -= ma_a;
-        ans += ma_b;
+    ll dp[H+1];
+    rep(i, H+1) {
+        dp[i] = MAX;
     }
-
-    mina = ans * 2;
+    dp[0] = 0;
     rep(i, N) {
-        rec(H, ans, i);
+        rep(j, H+1) {
+            dp[min(j+A[i],H)] = min(dp[min(j+A[i],H)],dp[j]+B[i]);
+        }
     }
-
-    
-    print(mina);
+    print(dp[H]);
     return 0;
 }

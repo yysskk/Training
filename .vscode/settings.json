@@ -99,10 +99,10 @@
     "code-runner.runInTerminal": true,
     "clang.executable": "clang++",
     "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ -std=c++14 $fileName && ./a.out",
+        "cpp": "cd $dir && g++ -std=c++17 $fileName && ./a.out",
     },
     "clang.cxxflags": [
-        "-std=c++14"
+        "-std=c++17"
     ],
     "code-runner.clearPreviousOutput": true,
     "git.ignoreLimitWarning": true
