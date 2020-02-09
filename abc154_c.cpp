@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc153/tasks/abc153_e
+// SeeAlso: https://atcoder.jp/contests/abc154/tasks/abc154_c
 
 #include <bits/stdc++.h>
 
@@ -10,13 +10,13 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000000
+#define MAX 100000
 #define NIL -1
 #define MOD 1000000007
 
 typedef int _loop_int;
 #define rep(i,n) for(int i = 0; i < n; i++)
-#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<=(_loop_int)(b);++i)
+#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
 #define debug(x) cout<<#x<<": "<<x<<endl
@@ -32,42 +32,18 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-ll H, N;
-ll A[MAX], B[MAX];
+int main (){ 
+    ll n;
+    set<ll> a;
+    cin >> n;
 
-int main() {
-
-    cin >> H >> N;
-
-    ll mm_a = 0;
-    rep(i, N) {
-        cin >> A[i] >> B[i];
-    } 
-
-    // ll dp[H+1];
-    // rep(i, H+1) {
-    //     dp[i] = MAX;
-    // }
-    // dp[0] = 0;
-    // rep(i, N) {
-    //     rep(j, H+1) {
-    //         dp[min(j+A[i],H)] = min(dp[min(j+A[i],H)],dp[j]+B[i]);
-    //     }
-    // }
-    // print(dp[H]);
-
-    ll dp[N][H+2];
-    memset(dp, MAX, sizeof(dp));
-    rep(i, N) {
-        dp[i][0] = 0;
+    rep(i, n) {
+        ll c;
+        cin >> c;
+        a.insert(c);
     }
 
-    rep(i, N) {
-        rep(hp, H+2) {
-            dp[i][min(hp+A[i], H)] = min(dp[i][hp]+B[i], dp[i][min(hp+A[i], H)]);
-        }
-    }
+    print((a.size()==n)?"YES":"NO");
 
-    print(dp[N][H]);
     return 0;
 }

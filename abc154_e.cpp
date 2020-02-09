@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc153/tasks/abc153_e
+// SeeAlso: https://atcoder.jp/contests/abc154/tasks/abc154_e
 
 #include <bits/stdc++.h>
 
@@ -10,13 +10,13 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000000
+#define MAX 100000
 #define NIL -1
 #define MOD 1000000007
 
 typedef int _loop_int;
 #define rep(i,n) for(int i = 0; i < n; i++)
-#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<=(_loop_int)(b);++i)
+#define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
 #define debug(x) cout<<#x<<": "<<x<<endl
@@ -32,42 +32,54 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-ll H, N;
-ll A[MAX], B[MAX];
+int ctoi(const char c){
+  switch(c){
+    case '0': return 0;
+    case '1': return 1;
+    case '2': return 2;
+    case '3': return 3;
+    case '4': return 4;
+    case '5': return 5;
+    case '6': return 6;
+    case '7': return 7;
+    case '8': return 8;
+    case '9': return 9;
+    default : return -1;
+  }
+}
 
-int main() {
+int k;
+string n;
 
-    cin >> H >> N;
 
-    ll mm_a = 0;
-    rep(i, N) {
-        cin >> A[i] >> B[i];
-    } 
+int main (){ 
+    cin >> n;
+    cin >> k;
 
-    // ll dp[H+1];
-    // rep(i, H+1) {
-    //     dp[i] = MAX;
-    // }
-    // dp[0] = 0;
-    // rep(i, N) {
-    //     rep(j, H+1) {
-    //         dp[min(j+A[i],H)] = min(dp[min(j+A[i],H)],dp[j]+B[i]);
-    //     }
-    // }
-    // print(dp[H]);
+    int size = n.size();
+    ll ans = 0;
 
-    ll dp[N][H+2];
-    memset(dp, MAX, sizeof(dp));
-    rep(i, N) {
-        dp[i][0] = 0;
-    }
-
-    rep(i, N) {
-        rep(hp, H+2) {
-            dp[i][min(hp+A[i], H)] = min(dp[i][hp]+B[i], dp[i][min(hp+A[i], H)]);
+    if(k>1) {
+        FOR(i,1,size) {
+            ll num = 1;
+            rep(j, k-1) {
+                FOR(m, i+j,size) {
+                    num *= ctoi(n[m]);
+                }
+            }
+            ans += num;
         }
     }
+    
+    n[0] = char(ctoi(n[0])-1);
+    FOR(i,1,size) {
+        ll num = 1;
+        rep(j, k-1) {
+            num *= 9;
+        }
+        ans += num;
+    }
 
-    print(dp[N][H]);
+    print(ans);
     return 0;
 }
