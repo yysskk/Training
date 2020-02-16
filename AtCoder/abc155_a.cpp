@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc152/tasks/abc152_d
+// SeeAlso: https://atcoder.jp/contests/abc155/tasks/abc155_a
 
 #include <bits/stdc++.h>
 
@@ -10,12 +10,12 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 200000
+#define MAX 100000
 #define NIL -1
 #define MOD 1000000007
 
 typedef int _loop_int;
-#define rep(i,n) for(int i = 1; i < n; i++)
+#define rep(i,n) for(int i = 0; i < n; i++)
 #define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
@@ -33,20 +33,22 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    ll N;
-    cin >> N;
-    ll dp[MAX][MAX];
+    int a[3];
+    cin >> a[0] >> a[1] >> a[2];
 
-    memset(dp, 0, sizeof(dp));
-
-    FOR(k, 1, N+1) {
-        FOR(i, 0, 10) {
-            FOR(j, 0, 10) {
-
+    bool flag = false;
+    rep(i,3) {
+        rep(j,3) {
+            if(i==j) continue;
+            if(a[i]!=a[j]) {
+                flag = true;
+                if(a[0]!=a[1] && a[1]!= a[2] && a[0] != a[2]) {
+                    flag = false;
+                }
+                break;
             }
         }
     }
-
-    print(dp[N][N]);
+    print(flag?"Yes":"No");
     return 0;
 }
