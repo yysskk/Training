@@ -33,20 +33,39 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int n;
-int a[MAX], c[MAX], b[MAX];
+int a[MAX][3];
+
 
 int main (){ 
 
     cin >> n;
-    memset(h, 0, sizeof(h));
     rep(i, n) {
-        cin >> a[i] >> b[i] >> c[i];
+        rep(j, 3) {
+            cin >> a[i][j];
+        }
     }
     
-    ll dp[n+5];
-    rep(i, n) {
-        
+    ll ans = 0;
+
+    ll dp[n+1][3];
+    memset(dp, 0, sizeof(dp));
+
+    rep(i ,3) {
+        dp[0][i] = a[0][i];
     }
-    print(dp[n-1]);
+
+    FOR(i, 1, n) {
+        rep(j, 3) {
+            rep(k, 3) {
+                if(j==k) continue;
+                dp[i][j] = max(dp[i][j],dp[i-1][k]+a[i][j]);
+            }
+        }
+    }
+
+    rep(i, 3) {
+        ans = max(ans, dp[n-1][i]);
+    }
+    print(ans);
     return 0;
 }   
