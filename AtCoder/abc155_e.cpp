@@ -38,15 +38,27 @@ int main() {
     ll count = n.size();
     ll ans = 0;
 
-    FOR(i, 0, count) {
+    ll temp = 0;
+    FORR(i, 0, count) {
         char c = n[i];
         ll keta = c - '0';
+        keta += temp;
         if (i>0) {
-            keta++;
+            keta--;
         }
-        if (keta!=0) {
+        if (keta > 5) {
             ans += (10 - keta);
+            temp = 1;
+        } else {
+            if (i>0) {
+                keta++;
+            }
+            ans += keta;
+            temp = 0;
         }
+    }
+    if(temp>0){
+        ans++;
     }
     print(ans);
     return 0;

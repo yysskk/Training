@@ -35,96 +35,65 @@ template<class T, class... A> void print(const T& first, const A&... rest) { cou
 ll casecounter(ll i) {
     return i * (i-1) / 2;
 }
+
 int main() {
     ll n, k;
-    multiset<ll> b;
-    multiset<ll, greater<ll>> a;
-    multiset<ll, greater<ll>> abs_set;
+    vector<ll> m;
+
+    // 正
+    vector<ll> a;
+    // 負
+    vector<ll> b;
+    // 0
+    vector<ll> c;
     cin >> n >> k;
-
-
-    ll a_counter = 0;
-    ll b_counter = 0;
 
     rep(i, n) {
         ll t;
         cin >> t;
+
+        m.push_back(t);
         if(t>0) {
-            a.insert(t);
-            a_counter++;
-            abs_set.insert(t);
+            a.push_back(t);
+        } else if (t==0) {
+            c.push_back(t);
         } else {
-            b.insert(t);
-            b_counter++;
-            abs_set.insert(abs(t));
+            b.push_back(t);
         }
     }
 
-
-    if(k <=(a_counter*b_counter)) {
+    if(k <=(a.size()*b.size())) {
         // 負の集合の場合
-        multiset<ll> ans;
-        for(auto it = a.begin();it!=a.end();it++) {
-            for(auto it2 = b.begin();it2!=b.end();it2++) {
-                ll v1 = *it;
-                ll v2 = *it2;
-                ans.insert((v1*v2));
-            }
-        }
+        sort(a.begin(), a.end(), greater<ll>());
+        sort(b.begin(), b.end(), greater<ll>());
 
-        ll temp = 1;
-        for(auto it = ans.begin();it!=ans.end();it++) {
-            if(temp==k) {
-                ll v = *it;
-                print(v);
-                break;
+        ll r = a.size()*b.size()+2;
+        ll l = 0;
+        ll mid = r;
+        while(r-l!=1) {
+            ll counter = 0;
+
+            rep(i, a.size()) {
+                
             }
-            temp++;
+
+            if (counter>k) {
+                r = mid;
+            } else {
+                l = mid;
+            }
+            
         }
+        print(-r);
+    } else if (k <= (a.size()*b.size()+(a.size()+b.size())*c.size())) {
+        // 0 の集合の場合
+        print(0);
     } else {
         // 正の集合の場合
-        ll counter = casecounter(n)-k+1;
-        multiset<ll, greater<ll>> ans;
-        ll temp = 0;
-        for(auto it = a.begin();it!=a.end();it++) {
-            for(auto it2 = a.begin();it2!=it;it2++) {
-                if(it==it2) continue;
-                temp++;
-                ll v1 = *it;
-                ll v2 = *it2;
-                ll hoge = v1 * v2;
-                ans.insert(hoge);
-            }
 
-            if(temp==counter) {
-                break;
-            }
-        }
-
-        temp = 0;
-        for(auto it = b.begin();it!=b.end();it++) {
-            for(auto it2 = b.begin();it2!=it;it2++) {
-                if(it==it2) continue;
-                temp++;
-                ll v1 = *it;
-                ll v2 = *it2;
-                ll hoge = v1 * v2;
-                ans.insert(hoge);
-            }
-
-            if(temp==counter) {
-                break;
-            }
-        }
-
-        temp = 0;
-        for(auto it = ans.begin();it!=ans.end();it++) {
-            temp++;
-            if(temp==counter) {
-                print(*it);
-                break;
-            }
-        }
+        sort(a.begin(), a.end(), greater<ll>());
+        sort(b.begin(), b.end(), greater<ll>());
+        debug("hge");
     }
 
     return 0;
