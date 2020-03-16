@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc085/tasks/abc085_c
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -32,9 +32,24 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+int n;
+char res[20];
+ 
+void dfs(int index, int used) {
+  if (index == n) {
+    print(res);
+    return;
+  }
+  rep(i,used+1) {
+    res[index] = 'a'+i;
+    dfs(index+1, max(used,i+1));
+  }
+}
+
 int main() {
-    ll n,y;
-    cin >> n >> y;
-    
+    cin>> n;
+    res[n] = 0;
+    dfs(0, 0);
+
     return 0;
 }
