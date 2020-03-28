@@ -48,7 +48,6 @@ int main() {
     q.push(a[0]+k-a[n-1]);
 
     ll c = q.top();
-    debug(c);
     print(k-c);
     return 0;
 }
