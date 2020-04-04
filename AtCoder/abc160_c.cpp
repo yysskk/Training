@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc085/tasks/abc085_c
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,8 +33,21 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    ll n,y;
-    cin >> n >> y;
-    
+
+    ll k, n;
+    cin >> k >> n;
+    ll a[n+1];
+    priority_queue<ll> q;
+    rep(i, n) {
+        cin >> a[i];
+        if(i>1) {
+            q.push(a[i]-a[i-1]);
+        }
+    }
+
+    q.push(a[0]+k-a[n-1]);
+
+    ll c = q.top();
+    print(k-c);
     return 0;
 }

@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc085/tasks/abc085_c
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,8 +33,18 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    ll n,y;
-    cin >> n >> y;
-    
+
+    ll a,b,c;
+
+    cin >> a >> b >> c;
+
+    if((c-a-b)<=0) {
+        print("No");
+        return 0;
+    }
+
+    bool flag = ((c-a-b) * (c-a-b) - 4*a*b) > 0;
+
+    print(flag ? "Yes" : "No");
     return 0;
 }
