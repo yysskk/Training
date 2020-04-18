@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc156/tasks/abc156_e
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,8 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-
+    int n,m;
+    cin >> n >> m;
+    print((n-1)*(m-1));
     return 0;
 }

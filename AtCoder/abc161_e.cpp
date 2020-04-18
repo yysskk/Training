@@ -55,7 +55,6 @@ void divideAndConcur(ll index, vector<ll> skipList, vector<ll> workDay) {
         }
         divideAndConcur(index+1, skipList, workDay);
     }
-    debug("hoge");
     return;
 }
 

@@ -47,8 +47,7 @@ int main() {
     double counter = 0;
     rep(i, n) {
         double t = (double)a[i];
-            debug(t);
-        if(t>border) {
+        if(t>=border) {
             counter+=1;
         }
     }

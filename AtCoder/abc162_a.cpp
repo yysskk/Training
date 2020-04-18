@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/abc156/tasks/abc156_e
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -33,6 +33,15 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-
+    string n;
+    cin >> n;
+    bool flag=false;
+    rep(i, n.size()) {
+        if(n[i]=='7') {
+            flag = true;
+            break;
+        }
+    }
+    print(flag?"Yes":"No");
     return 0;
 }
