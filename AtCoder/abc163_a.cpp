@@ -33,6 +33,10 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    double r;
+    cin >> r;
+
+    double PI=3.14159265358979323846;
+    print(2 * r * PI);
     return 0;
 }

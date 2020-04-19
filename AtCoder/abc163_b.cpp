@@ -33,6 +33,19 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    ll n;
+    ll m;
+    cin >> n >> m;
+    rep(i, m) {
+        ll a;
+        cin >> a;
+        n -= a;
+    }
+
+    if(n<0) {
+        print(-1);
+    } else {
+        print(n);
+    }
     return 0;
 }
