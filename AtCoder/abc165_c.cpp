@@ -32,46 +32,43 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+int n,m,q;
+int a[51][4];
+int ans = 0;
+
+void rec(int selectindex, vector<int> A) {
+    int asize = A.size();
+    if(asize==n) {
+        int anstemp = 0;
+        rep(i, q) {
+            int t = A[a[i][1]-1] - A[a[i][0]-1];
+            if(t==a[i][2]) {
+                anstemp += a[i][3];
+            }
+        }
+        ans = max(ans, anstemp);
+        return;
+    }
+
+    FOR(i, selectindex, m) {
+        vector<int> t = A;
+        t.push_back(i+1);
+        rec(i, t);
+    }
+
+    return;
+}
+
 int main() {
-    cin >> n;
+    cin >> n >> m >> q;
 
-    ll a[n];
-    rep(i, n) {
-        cin >> a[i];
+    rep(i, q) {
+        cin >> a[i][0] >> a[i][1] >> a[i][2] >> a[i][3];
     }
 
-    // i: index
-    // j: 移動した場所のスコア
-    ll dp[n][n];
+    vector<int> temp;
+    rec(0, temp);
 
-    rep(i, n) {
-        rep(j, n) {
-            ll t = a[i];
-            dp[i][j] = a[i] * abs(i-j);
-        }
-    }
-
-    ll ans = 0;
-    int right = n-1;
-    int left = 0;
-    rep(i, n) {
-        ll right = 0;
-        ll maxRight = dp[][];
-        rep(j, n) {
-
-        }
-
-        ll left = 0;
-        rep(j, n) {
-
-        }
-
-        if(left> right) {
-
-        } else {
-
-        }
-    }
-    
+    print(ans);
     return 0;
 }

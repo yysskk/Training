@@ -33,45 +33,27 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    int n;
     cin >> n;
-
-    ll a[n];
+    int a[n];
+    int counter = 0;
+    int sum = 0;
     rep(i, n) {
-        cin >> a[i];
-    }
-
-    // i: index
-    // j: 移動した場所のスコア
-    ll dp[n][n];
-
-    rep(i, n) {
-        rep(j, n) {
-            ll t = a[i];
-            dp[i][j] = a[i] * abs(i-j);
+        int t;
+        cin >> t;
+        a[i] = t;
+        sum += t;
+        if(t>0 ) {
+            counter++;
         }
     }
-
-    ll ans = 0;
-    int right = n-1;
-    int left = 0;
-    rep(i, n) {
-        ll right = 0;
-        ll maxRight = dp[][];
-        rep(j, n) {
-
-        }
-
-        ll left = 0;
-        rep(j, n) {
-
-        }
-
-        if(left> right) {
-
-        } else {
-
-        }
+    int temp = sum%counter;
+    if (temp==0) {
+        print(sum/counter);
+    } else {
+        print((sum+counter-temp)/counter);
     }
-    
+
+
     return 0;
 }
