@@ -32,29 +32,51 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-int main() {
-    double m;
-    cin >> m;
-    int d = m / 1000;
+ll n, m;
+multimap<ll, ll> mm;
+ll h[100002];
 
-    if(m < 100) {
-        print("00");
-    } else if(100 <= m && m <= 5000) {
-        int i = m / 100;
-        if (i < 10) {
-            cout << '0' << i << endl;
-        } else {
-            print(i);
-        }
-    } else if (6000 <= m && m <= 30000) {
-        int i = (m + 50000)/1000;
-        print(i);
-    } else if(35000 <= m && m<=70000) {
-        int i = (m - 30000) / 5000;
-        i += 80;
-        print(i);
-    } else if (m > 70000) {
-        print("89");
+int main() {
+    
+    cin >> n >> m;
+    
+    rep(i, n) {
+        cin >> h[i];
     }
+    
+    rep(i, m) {
+        ll a,b;
+        cin >> a >> b;
+        mm.insert(make_pair(a-1, b-1));
+        mm.insert(make_pair(b-1, a-1));
+    }
+
+    ll ans = 0;
+
+    rep(i, n) {
+        if (h[i]==-1) continue;
+        ll currentH = h[i];
+        auto ret = mm.equal_range(i);
+        bool flag = true;
+
+        if (ret.first==ret.second) {
+            ans++;
+            continue;
+        }
+
+        for(auto it = ret.first; it !=ret.second;it++) {
+            ll nextI = it->second;
+            if(h[nextI]<currentH) {
+            } else {
+                flag = false;
+            }
+        }
+
+        if (flag) {
+            ans++;
+        }
+    }
+
+    print(ans);
     return 0;
 }
