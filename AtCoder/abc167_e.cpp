@@ -33,6 +33,36 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    ll n,m,k;
+    cin >> n >> m >> k;
+
+    ll dp[200002];
+    ll temp[200002];
+
+    memset(dp,0,sizeof(dp));
+    dp[0] = m;    
+    memcpy(temp, dp, sizeof(dp));
+
+    for(ll i=2;i<=n;i++) {
+        ll kaburi = min(i-1, k);
+
+        dp[0] = temp[0] * (m-1);
+        FOR(j, 1, kaburi+1) {
+            dp[j] = temp[j-1];
+
+            if(j<(i-1)) {
+                dp[j] += temp[j]*(m-1);
+            }
+        }
+
+        memcpy(temp, dp, sizeof(dp));
+    }
+
+    ll ans = 0;
+    FOR(i, 0, k+1) {
+        ans += dp[i];
+        ans %= 998244353;
+    }
+    print(ans);
     return 0;
 }

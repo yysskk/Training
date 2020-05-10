@@ -33,6 +33,14 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    string s,t;
+    cin >> s >> t;
+    string ts = t.substr(0, s.size());
+
+    if ((s.size()+1)==t.size()&&ts==s) {
+        print("Yes");
+    } else {
+        print("No");
+    }
     return 0;
 }

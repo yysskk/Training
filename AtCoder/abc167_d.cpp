@@ -33,6 +33,58 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    
+    ll n, k;
+    cin >> n >> k;
+
+    ll a[n];
+    rep(i, n) {
+        ll t;
+        cin >> t;
+        a[i] = t-1; 
+    }
+
+    set<ll> st;
+
+    ll loopStart, loopCount;
+    ll loopStartPosition;
+    ll position = 0;
+    rep(i, n) {
+        st.insert(position);
+        if(st.size()!=(i+1)) {
+            loopStart = position;
+            loopCount = i;
+            break;
+        }
+        position = a[position];
+    }
+
+    position = 0;
+    rep(i, n) {
+        if(loopStart==position) {
+            loopStartPosition = i;
+            loopCount -= i;
+            break;
+        }
+        position = a[position];
+    }
+
+    if(k<=loopStartPosition) {
+        ll ans = 0;
+        rep(i, k) {
+            ans = a[ans];
+        }
+        print(ans+1);
+        return 0;
+    }
+
+    k -= loopStartPosition;
+    k %= loopCount;
+
+    ll ans = loopStart;
+    rep(i, k) {
+        ans = a[ans];
+    }
+
+    print(ans+1);
     return 0;
 }
