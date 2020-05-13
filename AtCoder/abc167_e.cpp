@@ -47,11 +47,13 @@ int main() {
         ll kaburi = min(i-1, k);
 
         dp[0] = temp[0] * (m-1);
+        dp[0] %= 998244353;
         FOR(j, 1, kaburi+1) {
             dp[j] = temp[j-1];
 
             if(j<(i-1)) {
                 dp[j] += temp[j]*(m-1);
+                dp[j] %= 998244353;
             }
         }
 
