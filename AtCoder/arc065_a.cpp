@@ -33,14 +33,35 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    ll n;
-    cin >> n;
-
-    ll a[n];
-    rep(i, n) {
-        cin >> a[i];
+    string s;
+    cin >> s;
+    bool flag = true;
+    while(flag) {
+        if(s.size()==0) {
+            print("YES");
+            return 0;
+        }
+        int ssize = s.size();
+        if(s.substr(max(ssize-7, 0), min(7,ssize))=="dreamer") {
+            s.erase(s.begin()+s.size()-7, s.end());
+            continue;
+        }
+        if(s.substr(max(ssize-5, 0), min(5,ssize))=="dream") {
+            s.erase(s.begin()+s.size()-5, s.end());
+            continue;
+        }        
+        if(s.substr(max(ssize-6, 0), min(6,ssize))=="eraser") {
+            s.erase(s.begin()+s.size()-6, s.end());
+            continue;
+        }
+        if(s.substr(max(ssize-5, 0), min(5,ssize))=="erase") {
+            s.erase(s.begin()+s.size()-5, s.end());
+            continue;
+        }
+        break;
     }
 
-    
+    print("NO");
+
     return 0;
 }

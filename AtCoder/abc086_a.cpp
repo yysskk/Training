@@ -32,15 +32,15 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+
+
 int main() {
-    ll n;
-    cin >> n;
-
-    ll a[n];
-    rep(i, n) {
-        cin >> a[i];
+    int a, b;
+    cin >> a >> b;
+    if(a%2==1&&b%2==1) {
+        print("Odd");
+    } else {
+        print("Even");
     }
-
-    
     return 0;
 }

@@ -33,14 +33,26 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    ll n;
-    cin >> n;
 
-    ll a[n];
+    int n;
+    cin >> n;
+    priority_queue<ll> pq;
     rep(i, n) {
-        cin >> a[i];
+        ll a;
+        cin >> a;
+        pq.push(a);
     }
 
-    
+    int ans = 0;
+    rep(i, n) {
+        if(i%2==0) {
+            ans += pq.top();
+        } else {
+            ans -= pq.top();
+        }
+        pq.pop();
+    }
+
+    print(ans);
     return 0;
 }

@@ -28,13 +28,21 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 
-void heapify(vector<int> array, int index) {
-    int node = 
+void heapify(vector<int>& array, int index) {
+    int right = index * 2;
+    int left = index * 2 + 1;
+    if (array[right] > array[index] && array[right] > array[left]) {
+        swap(array[right], array[index]);
+        heapify(array, right);
+    } else if (array[right] > array[index] && array[right] > array[left]) {
+        swap(array[right], array[index]);
+        heapify(array, right);
+    }
 }
 
 int main() {
 
     vector<int> array;
-    heapify(array);
+    heapify(array, array.size()-1);
     return 0;
 }
