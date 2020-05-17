@@ -33,27 +33,28 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    ll n;
-    cin >> n;
+    int a,b;
+    cin >> a >> b;
 
-    ll current_time = 0;
-    pair<ll, ll> current = make_pair(0,0);
-
-    rep(i, n) {
-        ll t,x,y;
-        cin >> t >> x >> y;
-
-        ll diff = abs(current.first - x) + abs(current.second - y);
-        ll time_diff = t - current_time;
-        if(diff > time_diff || (time_diff-diff)%2 == 1) {
-            print("No");
-            return 0;
-        } else {
-            current = make_pair(x,y);
-            current_time = t;    
+    ll dp[200000];
+    memset(dp, 0, sizeof(dp));
+    int i = 1;
+    ll result = 0;
+    while(result<200000) {
+        result = i*i;
+        if(result<200000) {
+            dp[result]++;
         }
+        i++;
     }
 
-    print("Yes");
+    result = a * pow(10, to_string(b).size()) + b;  
+
+    if(dp[result]>0) {
+        print("Yes");
+    } else {
+        print("No");
+    }
+
     return 0;
 }
