@@ -1,4 +1,4 @@
-// SeeAlso: https://atcoder.jp/contests/dp/tasks/dp_a
+// SeeAlso: 
 
 #include <bits/stdc++.h>
 
@@ -31,32 +31,39 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 #define print2D(h, w, arr) rep(i, h) { rep(j, w) cout << arr[i][j] << " "; cout << endl; }
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
+template<class T> inline bool chmin(T& a, T b) {
+    if (a > b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
+template<class T> inline bool chmax(T& a, T b) {
+    if (a < b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
 
-int n;
-int h[MAX];
-
-
-int main (){ 
-
+int main() {
+    ll n;
     cin >> n;
-    memset(h, 0, sizeof(h));
+    ll h[n];
     rep(i, n) {
         cin >> h[i];
     }
-    
-    ll dp[n+5];
-    memset(dp, -1, sizeof(dp));
+
+    ll dp[n];
+    memset(dp, MOD, sizeof(dp));
     dp[0] = 0;
-    rep(i, n) {
-        FOR(j,i+1,i+3) {
-            if(dp[j] >= 0) {
-                dp[j] = min(dp[j], dp[i]+abs(h[j]-h[i]));
-            } else {
-                dp[j] = dp[i]+abs(h[j]-h[i]);
-            }
+    FOR(i, 1, n) {
+        chmin(dp[i], dp[i-1] + abs(h[i]-h[i-1]));
+        if (i>1) {
+            chmin(dp[i], dp[i-2] + abs(h[i]-h[i-2]));
         }
     }
 
     print(dp[n-1]);
     return 0;
-}   
+}
