@@ -32,21 +32,55 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-int main() {
+ll n, k ,d;
+vector<ll> a;
+priority_queue<string, vector<string>, greater<string>> pq;
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
+// i: 現在の位置
+// counter: sの長さ
+// s: 作成した文字列
+void rec(ll i, ll counter, string s) {
+    if(counter == k) {
+        pq.push(s);
+        return;
     }
-    cout << "-1 -1 -1" << endl; 
+
+    // 文字の長さを超えたら終了
+    if (i >= n) {
+        return;
+    }
+    
+    s.push_back(' ');
+    s.push_back(a[i] + '0');
+    counter++;
+    FOR(j, i+d, n) {
+        rec(j, counter, s);
+    }
+
+    if(counter == k) {
+        pq.push(s);
+        return;
+    }
+    return;
+}
+
+int main() {
+    cin >> n >> k >> d;
+    rep(i, n) {
+        ll t;
+        cin >> t;
+        a.push_back(t);
+    }
+
+    rep(i, n) {
+        rec(i+d, 1, to_string(a[i]));
+    }
+
+    if (pq.empty()) {
+        print(-1);
+    } else {
+        print(pq.top());
+    }
+
     return 0;
 }

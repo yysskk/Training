@@ -33,20 +33,29 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    
+    map<string, int> m;
+    m.insert(make_pair("B9", -9));
+    m.insert(make_pair("B8", -8));
+    m.insert(make_pair("B7", -7));
+    m.insert(make_pair("B6", -6));
+    m.insert(make_pair("B5", -5));
+    m.insert(make_pair("B4", -4));
+    m.insert(make_pair("B3", -3));
+    m.insert(make_pair("B2", -2));
+    m.insert(make_pair("B1", -1));
+    m.insert(make_pair("1F", 0));
+    m.insert(make_pair("2F", 1));
+    m.insert(make_pair("3F", 2));
+    m.insert(make_pair("4F", 3));
+    m.insert(make_pair("5F", 4));
+    m.insert(make_pair("6F", 5));
+    m.insert(make_pair("7F", 6));
+    m.insert(make_pair("8F", 7));
+    m.insert(make_pair("9F", 8));
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
-    }
-    cout << "-1 -1 -1" << endl; 
+    string s,t;
+    cin >> s >> t;
+    print(abs(m.at(t)-m.at(s)));
     return 0;
 }

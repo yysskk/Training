@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc156/tasks/abc156_b
 
 #include <bits/stdc++.h>
 
@@ -32,21 +32,48 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
+class Radix {
+private:
+  const char* s;
+  int a[128];
+public:
+  Radix(const char* s = "0123456789ABCDEF") : s(s) {
+    int i;
+    for(i = 0; s[i]; ++i)
+      a[(int)s[i]] = i;
+  }
+  std::string to(long long p, int q) {
+    int i;
+    if(!p)
+      return "0";
+    char t[64] = { };
+    for(i = 62; p; --i) {
+      t[i] = s[p % q];
+      p /= q;
+    }
+    return std::string(t + i + 1);
+  }
+  std::string to(const std::string& t, int p, int q) {
+    return to(to(t, p), q);
+  }
+  long long to(const std::string& t, int p) {
+    int i;
+    long long sm = a[(int)t[0]];
+    for(i = 1; i < (int)t.length(); ++i)
+      sm = sm * p + a[(int)t[i]];
+    return sm;
+  }
+};
+
 int main() {
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
-    }
-    cout << "-1 -1 -1" << endl; 
+    Radix r;
+
+    ll n;
+    int k;
+    cin >> n >> k;
+
+    string s = r.to(n, k);
+    print(s.size());
     return 0;
 }

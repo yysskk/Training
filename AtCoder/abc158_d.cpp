@@ -33,20 +33,52 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    string s;
+    cin >> s;
+    vector<char> ans;
+    rep(i, s.size()) {
+        ans.push_back(s[i]);
+    }
+    
+    ll q;
+    cin >> q;
+    bool hanten = false;
+    rep(i, q) {
+        int t;
+        cin >> t;
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
+        if(t==1) {
+            hanten = !hanten;
+        } else {
+            int f;
+            char c;
+            cin >> f;
+            cin >> c;
+
+            bool isFront;
+
+            if(f==1) {
+                isFront = !hanten;
+            } else {
+                isFront = hanten;
+            }
+            
+            if(isFront) {
+                ans.insert(ans.begin(),c);
+            } else {
+                ans.push_back(c);
             }
         }
     }
-    cout << "-1 -1 -1" << endl; 
+
+    if(hanten) {
+        reverse(ans.begin(), ans.end());
+    }
+
+    for(auto it=ans.begin();it!=ans.end();it++){
+        cout << *it;
+    }
+
+    cout << endl;
     return 0;
 }

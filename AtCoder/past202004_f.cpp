@@ -33,20 +33,37 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
+    ll n;
+    cin >> n;
+    ll a[n],b[n];
+    multimap<ll, int> mm;
+    rep(i, n) {
+        int t;
+        cin >> t >> b[i];
+        a[i] = t-1;
+        mm.emplace(t-1, b[i]);
     }
-    cout << "-1 -1 -1" << endl; 
+
+    ll dp[n];
+    dp[0]=0;
+    priority_queue<ll> pq;
+    memset(dp, 0, sizeof(dp));
+
+    rep(i, n) {
+        auto p = mm.equal_range(i);
+        for(auto it = p.first; it!=p.second;it++) {
+            pq.push(it->second);
+        }        
+        int t = pq.top();
+        pq.pop();
+        if (i>0) {
+            dp[i] = dp[i-1];
+        }
+        dp[i] += t;
+    }
+
+    rep(i, n) {
+        print(dp[i]);
+    }
     return 0;
 }

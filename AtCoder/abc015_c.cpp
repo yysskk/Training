@@ -32,21 +32,40 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-int main() {
+bool ans = true;
+int n, k;
+int t[5][5];
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
+void rec(int count, int value) {
+    if(count == n || !ans) {
+        if (value==0) {
+            ans = false;
+        }
+        return;
+    }
+
+    rep(i, k) {
+        if (count>0) {
+            rec(count+1, value ^ t[count][i]);
+        } else {
+            rec(count+1, t[0][i]);
         }
     }
-    cout << "-1 -1 -1" << endl; 
+
+    return;
+}
+
+int main() {
+    cin >> n >> k;
+
+    rep(i, n) {
+        rep(j, k) {
+            cin >> t[i][j];
+        }
+    }
+
+    rec(0, 0);
+
+    print(ans?"Nothing":"Found");
     return 0;
 }

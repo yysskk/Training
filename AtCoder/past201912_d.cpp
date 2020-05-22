@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/past201912-open/tasks/past201912_d
 
 #include <bits/stdc++.h>
 
@@ -33,20 +33,34 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    ll n;
+    cin >> n;
+    vector<ll> a;
+    rep(i, n) {
+        ll t;
+        cin >> t;
+        a.push_back(t);
+    }
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
+    ll same = -1;
+    ll no = a[0];
+    sort(a.begin(), a.end());
+    FOR(i, 1, n) {
+        if(a[i-1]==a[i]) {
+            same = a[i];
+        } 
+        
+        if(a[i-1] != (a[i-2]+1)) {
+            no = a[i-2];
+            debug(no);
         }
     }
-    cout << "-1 -1 -1" << endl; 
+
+    if(same==-1) {
+        print("Correct");
+        return 0;
+    }
+
+    cout << same << " " << no << endl;
     return 0;
 }

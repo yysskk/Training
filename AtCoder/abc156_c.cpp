@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc156/tasks/abc156_c
 
 #include <bits/stdc++.h>
 
@@ -10,7 +10,7 @@ typedef vector<ll> vl;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
 
-#define MAX 100000
+#define MAX 900000000
 #define NIL -1
 #define MOD 1000000007
 
@@ -33,20 +33,23 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
+    int n;
+    cin >> n;
+    int x[n];
+    int mm = 0;
+    rep(i,n) {
+        cin >> x[i];
+        mm = max(mm, x[i]);
     }
-    cout << "-1 -1 -1" << endl; 
+
+    ll minm = MAX;
+    FOR(i, -100, mm+100) {
+        ll tsum=0;
+        rep(j, n) {
+            tsum += (x[j]-i) * (x[j]-i);
+        }
+        minm = min(minm, tsum);
+    }
+    print(minm);
     return 0;
 }

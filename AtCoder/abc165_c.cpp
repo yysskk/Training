@@ -32,21 +32,43 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-int main() {
+int n,m,q;
+int a[51][4];
+int ans = 0;
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
+void rec(int selectindex, vector<int> A) {
+    int asize = A.size();
+    if(asize==n) {
+        int anstemp = 0;
+        rep(i, q) {
+            int t = A[a[i][1]-1] - A[a[i][0]-1];
+            if(t==a[i][2]) {
+                anstemp += a[i][3];
             }
         }
+        ans = max(ans, anstemp);
+        return;
     }
-    cout << "-1 -1 -1" << endl; 
+
+    FOR(i, selectindex, m) {
+        vector<int> t = A;
+        t.push_back(i+1);
+        rec(i, t);
+    }
+
+    return;
+}
+
+int main() {
+    cin >> n >> m >> q;
+
+    rep(i, q) {
+        cin >> a[i][0] >> a[i][1] >> a[i][2] >> a[i][3];
+    }
+
+    vector<int> temp;
+    rec(0, temp);
+
+    print(ans);
     return 0;
 }

@@ -33,20 +33,36 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    
+    string s;
+    cin >> s;
+    if (s.size()<4) {
+        print(0);
+        return 0;
+    }
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
+    ll valu = atoi(s.c_str());
+
+    ll ans = 0;
+
+    set<string> dp;
+    ll i = 1;
+    ll temp = 2019;
+    while(valu>=temp) {
+        temp = i * 2019;
+        dp.insert(to_string(temp));
+        i++;
+    }
+ 
+    rep(i, (s.size()-3)) {
+        FOR(j, 4, s.size()-i+1) {
+            string temp = s.substr(i, j);
+            if(dp.find(temp) != dp.end()) {
+               ans++;
             }
         }
     }
-    cout << "-1 -1 -1" << endl; 
+ 
+    print(ans);
     return 0;
 }

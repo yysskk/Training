@@ -32,21 +32,61 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-int main() {
+ll ans = 0;
+int n,m;
+ll x;
+ll a[13][13];
+ll c[13];
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
+ll flag = false;
+
+void rec(vector<ll> check, ll index, ll price) {
+    if(index>=n) {
+        rep(i, m) {
+            if(check[i]<x) {
+                return;
             }
         }
+        flag = true;
+        ans = min(ans, price);
+        return;
     }
-    cout << "-1 -1 -1" << endl; 
+
+    rec(check, index+1, price);
+
+    rep(i, m) {
+        check[i] += a[index][i];
+    }
+
+    rec(check, index+1, price+c[index]);
+
+    return;
+}
+
+int main() {
+    
+    cin >> n >> m >> x;
+    
+    
+    rep(i, n) {
+        cin >> c[i];
+        ans += c[i];
+        rep(j, m) {
+            cin >> a[i][j];
+        }
+    }
+
+    vector<ll> check;
+    rep(i, m) {
+        check.push_back(0);
+    }
+    rec(check, 0, 0);    
+    
+    if(!flag) {
+        print(-1);
+    } else {
+        print(ans);
+    }
+
     return 0;
 }

@@ -33,20 +33,28 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
+    int a,b;
+    cin >> a >> b;
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
+    ll dp[200000];
+    memset(dp, 0, sizeof(dp));
+    int i = 1;
+    ll result = 0;
+    while(result<200000) {
+        result = i*i;
+        if(result<200000) {
+            dp[result]++;
         }
+        i++;
     }
-    cout << "-1 -1 -1" << endl; 
+
+    result = a * pow(10, to_string(b).size()) + b;  
+
+    if(dp[result]>0) {
+        print("Yes");
+    } else {
+        print("No");
+    }
+
     return 0;
 }

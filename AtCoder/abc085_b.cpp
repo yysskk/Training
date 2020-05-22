@@ -34,19 +34,16 @@ template<class T, class... A> void print(const T& first, const A&... rest) { cou
 
 int main() {
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
+    int n;
+    cin >> n;
+    set<ll> a;
+
+    rep(i,n) {
+        int d;
+        cin >> d;
+        a.insert(d);
     }
-    cout << "-1 -1 -1" << endl; 
+
+    print(a.size());
     return 0;
 }

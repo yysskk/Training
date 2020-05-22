@@ -1,4 +1,4 @@
-// SeeAlso: 
+// SeeAlso: https://atcoder.jp/contests/abc156/tasks/abc156_e
 
 #include <bits/stdc++.h>
 
@@ -34,19 +34,5 @@ template<class T, class... A> void print(const T& first, const A&... rest) { cou
 
 int main() {
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
-    }
-    cout << "-1 -1 -1" << endl; 
     return 0;
 }

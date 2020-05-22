@@ -34,19 +34,25 @@ template<class T, class... A> void print(const T& first, const A&... rest) { cou
 
 int main() {
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
+    int n;
+    cin >> n;
+    priority_queue<ll> pq;
+    rep(i, n) {
+        ll a;
+        cin >> a;
+        pq.push(a);
     }
-    cout << "-1 -1 -1" << endl; 
+
+    int ans = 0;
+    rep(i, n) {
+        if(i%2==0) {
+            ans += pq.top();
+        } else {
+            ans -= pq.top();
+        }
+        pq.pop();
+    }
+
+    print(ans);
     return 0;
 }

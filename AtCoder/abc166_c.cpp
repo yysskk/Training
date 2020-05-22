@@ -32,21 +32,51 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
-int main() {
+ll n, m;
+multimap<ll, ll> mm;
+ll h[100002];
 
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
+int main() {
+    
+    cin >> n >> m;
+    
+    rep(i, n) {
+        cin >> h[i];
+    }
+    
+    rep(i, m) {
+        ll a,b;
+        cin >> a >> b;
+        mm.insert(make_pair(a-1, b-1));
+        mm.insert(make_pair(b-1, a-1));
+    }
+
+    ll ans = 0;
+
+    rep(i, n) {
+        if (h[i]==-1) continue;
+        ll currentH = h[i];
+        auto ret = mm.equal_range(i);
+        bool flag = true;
+
+        if (ret.first==ret.second) {
+            ans++;
+            continue;
+        }
+
+        for(auto it = ret.first; it !=ret.second;it++) {
+            ll nextI = it->second;
+            if(h[nextI]<currentH) {
+            } else {
+                flag = false;
             }
         }
+
+        if (flag) {
+            ans++;
+        }
     }
-    cout << "-1 -1 -1" << endl; 
+
+    print(ans);
     return 0;
 }

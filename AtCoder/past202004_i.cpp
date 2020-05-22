@@ -33,20 +33,42 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-
-    ll n,y;
-    cin >> n >> y; 
-    y /= 1000;
-    rep(i, n+1) {
-        rep(j, n+1-i) {
-            ll k = n-i-j;
-            ll en = 10 * i + 5 * j + k;
-            if(en==y) {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
-            }
-        }
+    int n;
+    cin >> n;
+    ll counter = 1;
+    rep(i, n) {
+        counter *= 2;
     }
-    cout << "-1 -1 -1" << endl; 
+
+    vector<pair<ll, ll>> a;
+    rep(i, counter) {
+        ll t;
+        cin >> t;
+        ll index = i;
+        a.push_back(make_pair(index, t));
+    }
+
+    ll ans[counter];
+    ll tcounter = counter;
+    for(int i=0;i<n;i++) {
+        tcounter /= 2;
+        rep(j, tcounter) {
+            auto first = a[j];
+            auto second = a[j+1];
+            if (first.second > second.second) {
+                a[j] = first;
+                ans[second.first] = i+1;
+            } else {
+                a[j] = second;
+                ans[first.first] = i+1;
+            }
+            a.erase(a.begin()+j+1);
+        }
+    } 
+    ans[a[0].first] = n;
+
+    rep(i, counter) {
+        print(ans[i]);
+    }
     return 0;
 }
