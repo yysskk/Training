@@ -35,22 +35,14 @@ template<class T, class... A> void print(const T& first, const A&... rest) { cou
 int main() {
     int n;
     cin >> n;
-    
-    double x[n], y[n];
-    rep(i, n) {
-        cin >> x[i] >> y[i];
+    n %= 10;
+    if (n == 2 || n == 4|| n == 5|| n == 7|| n == 9) {
+        print("hon");
+    } else     if (n == 0 || n == 1|| n == 6|| n == 8) {
+        print("pon");
+    } else {
+        print("bon");
     }
 
-    double ans = 0;
-    rep(i, n) {
-        rep(j, n) {
-            if (i==j) continue;
-
-            double distance = sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));
-            ans = max(ans, distance);
-        }
-    }
-
-    print(ans);
     return 0;
 }

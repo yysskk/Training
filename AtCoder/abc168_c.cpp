@@ -33,24 +33,22 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    int n;
-    cin >> n;
+    double pi = 3.14159265358979;
+    double a,b,h,m;
+    cin >> a >> b >> h >> m;
     
-    double x[n], y[n];
-    rep(i, n) {
-        cin >> x[i] >> y[i];
+    double h_seta = 2 * pi * (h+m/60) / 12;
+    double m_seta = 2* pi * m / 60;
+    double ans;
+
+    if(h_seta==m_seta) {
+        print(0);
+        return 0;
     }
 
-    double ans = 0;
-    rep(i, n) {
-        rep(j, n) {
-            if (i==j) continue;
-
-            double distance = sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));
-            ans = max(ans, distance);
-        }
-    }
-
+    double x = (a*sin(h_seta)+b*sin(m_seta)) * (a*sin(h_seta)+b*sin(m_seta));
+    double y = (a*cos(h_seta)-b*cos(m_seta)) * (a*cos(h_seta)-b*cos(m_seta));
+    ans = pow((x+y), 0.5);
     print(ans);
     return 0;
 }

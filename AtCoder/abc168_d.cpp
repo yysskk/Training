@@ -33,24 +33,36 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    int n;
-    cin >> n;
-    
-    double x[n], y[n];
-    rep(i, n) {
-        cin >> x[i] >> y[i];
+    ll n,m;
+    cin >> n >> m;
+    ll a[m], b[m];
+    vector<ll> route[n];
+    memset(route, 0, sizeof(route));
+    rep(i, m) {
+        cin >> a[i] >> b[i];
+        a[i]--;b[i]--;
+        route[a[i]].push_back(b[i]);
+        route[b[i]].push_back(a[i]);
     }
+    ll ans[n];
+    bool visited[n];
+    memset(visited, false, sizeof(visited));
+    deque<ll> q;
+    q.push_back(0);
 
-    double ans = 0;
-    rep(i, n) {
-        rep(j, n) {
-            if (i==j) continue;
-
-            double distance = sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));
-            ans = max(ans, distance);
+    while(!q.empty()) {
+        ll v = q.front();
+        q.pop_front();
+        for (int i : route[v]) {
+            if(visited[i]) continue;
+            ans[i] = v;
+            q.push_back(i);
+            visited[i] = true;
         }
     }
-
-    print(ans);
+    print("Yes");
+    FOR(i, 1, n) {
+        print(ans[i]+1);
+    }
     return 0;
 }

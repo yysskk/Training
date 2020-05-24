@@ -33,24 +33,16 @@ template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
 
 int main() {
-    int n;
-    cin >> n;
-    
-    double x[n], y[n];
-    rep(i, n) {
-        cin >> x[i] >> y[i];
-    }
-
-    double ans = 0;
-    rep(i, n) {
-        rep(j, n) {
-            if (i==j) continue;
-
-            double distance = sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));
-            ans = max(ans, distance);
+    int k;
+    cin >> k;
+    string s;
+    cin >> s;
+    if(s.size()<=k) print(s);
+    else {
+        rep(i, k){
+            cout << s[i];
         }
+        cout << "..." << endl;
     }
-
-    print(ans);
     return 0;
 }
