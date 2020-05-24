@@ -49,18 +49,18 @@ template<class T> inline bool chmax(T& a, T b) {
 int main() {
     ll n;
     cin >> n;
-    ll h[n];
+    ll a[n];
     rep(i, n) {
-        cin >> h[i];
+        cin >> a[i];
     }
 
     ll dp[n];
     memset(dp, MOD, sizeof(dp));
     dp[0] = 0;
     FOR(i, 1, n) {
-        chmin(dp[i], dp[i-1] + abs(h[i]-h[i-1]));
+        chmin(dp[i], dp[i-1] + abs(a[i]-a[i-1]));
         if (i>1) {
-            chmin(dp[i], dp[i-2] + abs(h[i]-h[i-2]));
+            chmin(dp[i], dp[i-2] + abs(a[i]-a[i-2]));
         }
     }
 

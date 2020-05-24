@@ -31,6 +31,20 @@ inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 #define print2D(h, w, arr) rep(i, h) { rep(j, w) cout << arr[i][j] << " "; cout << endl; }
 template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
 template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
+template<class T> inline bool chmin(T& a, T b) {
+    if (a > b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
+template<class T> inline bool chmax(T& a, T b) {
+    if (a < b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
 
 int main() {
     
