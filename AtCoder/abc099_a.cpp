@@ -46,24 +46,14 @@ template<class T> inline bool chmax(T& a, T b) {
     return false;
 }
 
+
 int main() {
-    ll n,k;
-    cin >> n >> k;
-    ll h[n];
-    rep(i, n) {
-        cin >> h[i];
+    int n;
+    cin >> n;
+    if(n<1000) {
+        print("ABC");
+    } else {
+        print("ABD");
     }
-
-    ll dp[n+1];
-    dp[0] = 0;
-    for(ll i= 1; i<n; i++) {
-        dp[i] = dp[i-1] + abs(h[i]-h[i-1]);
-        ll leng = min(k, i)+1;
-        FOR(j, 1, leng) {
-            chmin(dp[i], dp[i-j] + abs(h[i]-h[i-j]));
-        }
-    } 
-
-    print(dp[n-1]);
     return 0;
 }
