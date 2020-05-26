@@ -36,6 +36,31 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 
 
 int main() {
-    
+    ll n;    
+    cin >> n;
+    ll a[n][3];
+    rep(i, n) {
+        rep(j, 3) {
+            cin >> a[i][j];
+        }
+    }
+
+    ll dp[n+2][3];
+    memset(dp, 0, sizeof(dp));
+    rep(i, n) {
+        rep(j, 3) {
+            rep(k, 3) {
+                if(j==k) continue;
+                chmax(dp[i+1][j], dp[i][k] + a[i][j]);
+            }
+        }
+    }
+
+    ll ans = 0;
+    rep(i, 3) {
+        chmax(ans, dp[n][i]);
+    }
+    print(ans);
+
     return 0;
 }
