@@ -34,9 +34,33 @@ template<class T, class... A> inline void print(const T& first, const A&... rest
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
 
-const long long INF = 1LL<<60;
 
 int main() {
-    
+    ll n;
+    cin >> n;
+    ll p[n];
+    rep(i, n) {
+        cin >> p[i];
+    }
+
+    bool dp[10001];
+    rep(i, 10001) dp[i] = false;
+    dp[0] = true;
+
+    rep(i, n) {
+        FORR(j, 0, 10001) {
+            if (dp[j]==true) {
+                dp[j+p[i]] = true;
+            }
+        }
+    }
+
+    ll ans = 0;
+    rep(i,10000) {
+        if(dp[i]==true) {
+            ans++;
+        }
+    }
+    print(ans);
     return 0;
 }
