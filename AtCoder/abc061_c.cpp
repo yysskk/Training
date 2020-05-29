@@ -15,7 +15,7 @@ typedef pair<ll,ll> pll;
 #define MOD 1000000007
 
 typedef int _loop_int;
-#define rep(i,n) for(ll i = 0; i < n; i++)
+#define rep(i,n) for(int i = 0; i < n; i++)
 #define FOR(i,a,b) for(_loop_int i=(_loop_int)(a);i<(_loop_int)(b);++i)
 #define FORR(i,a,b) for(_loop_int i=(_loop_int)(b)-1;i>=(_loop_int)(a);--i)
 
@@ -37,25 +37,23 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    ll x,y;
-    cin >> x >> y;
-
-    ll n = max(x,y);
-    ll dp[n+1][n+1];
-    memset(dp, 0, sizeof(dp));
-    dp[0][0] = 1;
-
-    rep(turn, n) {
-        ll turnx = min(x, turn*2);
-        ll turny = min(y,turn*2);
-        rep(i, turnx) {
-            rep(j, turny) {
-                dp[i+1][j+2] += dp[i][j];
-                dp[i+2][j+1] += dp[i][j];
-            }
-        }
+    ll n,k;
+    cin >> n >> k;
+    ll arry[100001];
+    memset(arry, 0, sizeof(arry));
+    rep(i,n) {
+        ll a,b;
+        cin >> a >> b;
+        arry[a] += b;
     }
 
-    print(dp[x][y]);
+    ll index = 0;
+    ll i = 0;
+    while (index<k) {
+        index += arry[i];
+        i++;
+    }
+    
+    print(i-1);
     return 0;
 }
