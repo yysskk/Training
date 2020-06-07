@@ -29,10 +29,21 @@ inline constexpr ll gcd(ll a,ll b){if(!a||!b)return 0;while(b){ll c=b;b=a%b;a=c;
 inline constexpr ll lcm(ll a,ll b){if(!a||!b)return 0;return a*b/gcd(a,b);}
 
 #define print2D(h, w, arr) rep(i, h) { rep(j, w) cout << arr[i][j] << " "; cout << endl; }
-template<class T> void print(const T& x){cout << setprecision(12) << x << endl;}
-template<class T, class... A> void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
+template<class T> inline void print(const T& x){cout << setprecision(12) << x << endl;}
+template<class T, class... A> inline void print(const T& first, const A&... rest) { cout << first << " "; print(rest...); }
+template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
+template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
+
+const long long INF = 1LL<<60;
 
 int main() {
-    
+    ll w,h;
+    cin >> w >> h;
+    if(w%16==0 && h%9==0) {
+        print("16:9");
+    } else {
+        print("4:3");
+    }
+
     return 0;
 }
