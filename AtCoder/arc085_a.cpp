@@ -41,7 +41,7 @@ int main() {
     cin >> n >> m;
     double ans = 0;
     ans += 100 * (n-m) / n;
-    ans += 1900 * m / n;
+    ans += 1900 * m / n / 2;
     print(ans);
     return 0;
 }

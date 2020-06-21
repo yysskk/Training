@@ -58,8 +58,7 @@ int main() {
         }
         t.erase(t.begin());
     }
-    debug(time1);
-    debug(time2);
+
     print(max(time1, time2));
     return 0;
 }
