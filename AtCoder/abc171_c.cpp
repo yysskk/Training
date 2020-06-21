@@ -100,33 +100,19 @@ int main() {
     ll n; cin >> n;
     string s;
 
-    ll suu = 1;
-    ll temp = 0;
-    ll tempn = n;
-    ll tsum = 0;
-    while(tempn>temp) {
-        n -= tsum;
-        ll t = 26;
-        rep(i, suu) {
-            tsum += t;
-            t *= 26;
+
+    while (n > 0) {
+        ll memo = n % 26;
+        if (memo == 0) {
+            s += 'z';
+            n = (n / 26) - 1;
+        } else {
+            s += (char) ((memo - 1) + 'a');
+            n = n / 26;
         }
-        temp = tsum;
-        suu++;
     }
 
-    suu--;
-
-    temp = 26;
-    rep(i, suu-1) temp *= 26; 
-    rep(i, suu) {
-        ll num = n / 26;
-        if (n%26!=0) num++;
-        n = n % temp;
-        s.push_back(henkan(num));
-        temp /= 26;
-    }
-
+    reverse(s.begin(), s.end());
     print(s);
     return 0;
 }
