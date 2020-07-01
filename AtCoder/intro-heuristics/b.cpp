@@ -37,10 +37,39 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    ll n; cin >> n;
-    ll a[n];
-    rep(i, n) cin >> a[i];
+    vector<int> A; 
+    rep(i, 5) {
+        int a;
+        cin >> a; A.push_back(a);
+    }
 
-    
+        int mid = 0;
+        for(int i=0;i<A.size();i++) {
+            if(abs(A[mid])>abs(A[i])) mid = i;
+        }
+        vector<int> ans;
+        ans.push_back(A[mid] * A[mid]);
+        int left = mid-1;
+        int right = mid+1;
+        while(left>=0 || right<A.size()) {
+            if(left<0) {
+                ans.push_back(A[right] * A[right]);
+                right++;
+            }
+            if(right>=A.size()) {
+                ans.push_back(A[left] * A[left]);
+                left--;
+            }
+            if(abs(A[left])<abs(A[right])) {
+                ans.push_back(A[left] * A[left]);
+                left--;                
+            } else {
+                ans.push_back(A[right] * A[right]);
+                right++;
+            }
+            debug(ans[ans.size()-1]);
+        }
+
+    rep(i, 5) print(ans[i]);
     return 0;
 }

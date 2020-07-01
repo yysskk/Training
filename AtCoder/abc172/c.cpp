@@ -37,10 +37,29 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    ll n; cin >> n;
-    ll a[n];
-    rep(i, n) cin >> a[i];
+    ll n, m, k; cin >> n >> m >> k;
+    ll a[n+1],b[m+1];
+    a[0] = 0;
+    b[0] = 0; 
+    ll b_limit = m;
+    FOR(i,1, n+1) {
+        cin >> a[i];
+        a[i] = a[i] + a[i-1];
+    }
+    FOR(i,1, m+1) {
+        cin >> b[i];
+        b[i] = b[i] + b[i-1];
+    }
 
-    
+    ll ans = 0;
+    rep(i, n+1) {
+        while(k<(a[i]+b[b_limit]) && b_limit>0) {
+            b_limit--;
+        }
+        if (a[i]+b[b_limit]<=k) ans = max(ans, i+b_limit);
+    }
+
+    print(ans);
+
     return 0;
 }

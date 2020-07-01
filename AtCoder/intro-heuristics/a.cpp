@@ -37,10 +37,6 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    ll n; cin >> n;
-    ll a[n];
-    rep(i, n) cin >> a[i];
-
     
     return 0;
 }

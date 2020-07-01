@@ -50,8 +50,7 @@ int main() {
         if (it!=a.end()) {
             temp = it->second;
         }
-        a.erase(t);
-        a.insert(make_pair(t, 1 + temp));
+        a[t] = 1 + temp;
     }
     ll q; cin >> q;
     rep(i, q) {
@@ -63,11 +62,9 @@ int main() {
             sum += it->second * c;
             auto it2 = a.find(c);
             if(it2 != a.end()) {
-                ll temp2 = it2->second + it->second;
-                a.erase(c);
-                a.insert(make_pair(c, temp2));
+                a[c] = it2->second + it->second;
             } else {
-                a.insert(make_pair(c,it->second));
+                a[c] = it->second;
             }
             a.erase(b);
         }

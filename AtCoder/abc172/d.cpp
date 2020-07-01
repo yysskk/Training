@@ -38,9 +38,23 @@ const long long INF = 1LL<<60;
 
 int main() {
     ll n; cin >> n;
-    ll a[n];
-    rep(i, n) cin >> a[i];
+    ll dp[n+1];
+    FOR(i, 1, n+1) {
+        dp[i] = 0;
+    }
 
-    
+    FOR(i, 1, n+1) {
+        ll temp = i;
+        ll counter = 1;
+        while(temp<=n) {
+            dp[temp]++;
+            counter++;
+            temp = i * counter;
+        }
+    }
+
+    ll ans = 0;
+    FOR(i, 1, n+1) ans += dp[i] * i;
+    print(ans);
     return 0;
 }
