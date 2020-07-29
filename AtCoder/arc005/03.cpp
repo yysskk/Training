@@ -35,6 +35,22 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    
+    int h,w; cin >> h >> w;
+    char c[h][w];
+    pair<int ,int> start, goal;
+    rep(i, h) {
+        rep(j, w) {
+            cin >> c[i][j];
+            if(c[i][j]=='s') {
+                start = make_pair(i, j);
+            }
+
+            if(c[i][j]=='g') {
+                start = make_pair(i, j);
+            }
+        }
+    }    
+
+
     return 0;
 }

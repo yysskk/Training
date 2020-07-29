@@ -34,7 +34,30 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 
 const long long INF = 1LL<<60;
 
+int dx[4] = {0, 1, -1, 0};
+int dy[4] = {1, 0, 0, -1};
+
 int main() {
-    
+    int h,w; cin >> h >> w;
+    char a[h][w];
+
+    queue<pair<int, int>> que;
+
+    rep(i, h) {
+        rep(j, w) {
+            cin >> a[i][j];
+            if (a[i][j]=='.') {
+                que.push(make_pair(i, j));
+            }
+        }
+    }
+
+    int counter = 0;
+    while(!que.empty()) {
+        
+        counter++;
+    }
+
+    print(counter);
     return 0;
 }

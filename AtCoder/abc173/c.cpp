@@ -34,7 +34,46 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 
 const long long INF = 1LL<<60;
 
+int h, w, k;
+ll ans = 0;
+void rec(int dw, int dh, char c[6][6]) {
+    if(dw==w && dh==h) {
+        int counter = 0;
+        rep(i, h) {
+            rep(j, w) {
+                if(c[i][j] == '#') counter++;
+            }
+        }
+        if (k==counter) ans++;
+    } else if (dh<h) {
+        char temp[6][6];
+        memcpy(temp, c, sizeof(c));
+        rep(i, w) {
+            temp[dh][i] = '.';
+        }
+        rec(dw, dh+1, temp);
+        rec(dw, dh+1, c);
+    } else if (dw<w) {
+        char temp2[6][6];
+        memcpy(temp2, c, sizeof(c));
+        rep(i, h) {
+            temp2[i][dw] = '.';
+        }
+        rec(dw+1, dh, temp2);
+        rec(dw+1, dh, c);
+    }
+}
+
 int main() {
-    
+    cin >> h >> w >> k;
+    char c[6][6];
+
+    rep(i, h) {
+        rep(j, w) cin >> c[i][j];
+    }
+
+    rec(0, 0, c);
+
+    print(ans);
     return 0;
 }

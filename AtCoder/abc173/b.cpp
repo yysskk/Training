@@ -35,6 +35,26 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
+    ll n; cin >> n;
+    int s[4]; 
+    rep(i,4) s[i] = 0;
+    rep(i, n) {
+        string t; cin >> t;
+        if(t== "AC") {
+            s[0]++;
+        } else if (t=="WA") {
+            s[1]++;
+        } else if (t=="TLE") {
+            s[2]++;
+        } else if (t=="RE") {
+            s[3]++;
+        }
+    }
+    
+    cout << "AC x " << s[0] << endl;
+    cout << "WA x " << s[1] << endl;
+    cout << "TLE x " << s[2] << endl;
+    cout << "RE x " << s[3] << endl;
     
     return 0;
 }

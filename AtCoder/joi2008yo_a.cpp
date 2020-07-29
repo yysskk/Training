@@ -35,6 +35,19 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    
+    int t; cin >> t;
+    int yen = 1000 - t;
+    int coin[6] = { 500, 100, 50, 10, 5, 1};
+
+    int count = 0;
+
+    int i = 0;
+    while(yen>0) {
+        count += yen / coin[i];
+        yen %= coin[i];
+        i++;
+    }
+
+    print(count);
     return 0;
 }

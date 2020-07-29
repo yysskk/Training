@@ -35,6 +35,9 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    
+    int n; cin >> n;
+    n %= 1000;
+    int ans = 1000 - n;
+    print(ans%1000);
     return 0;
 }

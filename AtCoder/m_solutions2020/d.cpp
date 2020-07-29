@@ -35,6 +35,32 @@ template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true
 const long long INF = 1LL<<60;
 
 int main() {
-    
+    int n; cin >> n;
+    int a[n];
+    rep(i, n) cin >> a[i];
+
+    ll yen = 1000;
+    ll kabu = 0;
+    rep(i, n) {
+        if(i==n-1) {
+            yen += a[i] * kabu;
+            continue;
+        } 
+
+        if(i==0 && a[i+1]>a[i]) {
+            kabu = yen / a[i];
+            yen %= a[i];
+            continue;
+        }
+
+        if(a[i+1]>a[i]) {
+            kabu += yen / a[i];
+            yen %= a[i];
+        } else if (a[i] > a[i-1]) {
+            yen += kabu * a[i];
+            kabu = 0;
+        }
+    }
+    print(yen);
     return 0;
 }
